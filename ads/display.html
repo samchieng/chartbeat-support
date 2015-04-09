@@ -1,0 +1,75 @@
+---
+layout: docs_ads_layout
+title: Ads Documentation
+categories: docs, ads
+---
+
+<section>
+
+	<h1>Campaign Tracking with DFP Integration</h1>                        
+	<p>Chartbeat integrates with your DFP account in order to communicate campaign tracking and display helpful information abot your campaigns in the Chartbeat user interface. Below you&#146;ll find instructions on how to set up this integration for both DFP Premium and Small Business.</p>
+
+	<h2>Setup Oauth</h2>
+	<p>In order for Chartbeat to have access to your DFP data, you must Oauth into your DFP account from the Chartbeat Ads dashboard. Simply click into the Settings panel, navigate to the Oauth Settings tab, select your domain, input your DFP network code and click &#145;Authorize DFP Access&#146;. This will open a Google authorization screen in a new window. Grant access to Chartbeat and you&#146;re good to go!</p>
+
+	<h2>Adding the Tracking Code</h2>
+	<p>Chartbeat&#146;s campaign tracker will measure exposure time for each impression in a campaign. This allows us to analyze performance for each piece of creative in a campaign, as well as the campaign as a whole. In order to do this, the following code must be included in all creatives that are served during a campaign.</p>
+
+	<pre><code>&#60;div id="chartbeat-ad-data" data-cb-creative-id="%ecid!" data-cb-campaign-id="%ebuy!" data-cb-placement-id="%epid!" data-cb-site-id="%esid!" data-cb-line-id="%eaid!" data-cb-creative-height="%%HEIGHT%%" data-cb-creative-width="%%WIDTH%%"&#62;&#60;/div&#62;
+	&#60;script src="//static.chartbeat.com/js/campaign_tracker.js"&#62;&#60;/script&#62;</code></pre>
+
+	<p><i>This code makes use of DFP-specific macros. Please don&#146;t use it with other ad servers.</i></p>
+
+	<p>This code can be added manually to the end of the snippet of each cretive in a campaign. However, we recommend that you automate this process by either creativing a Creative Wrapper or creating a custom Creative Template.</p>
+
+	<h3>Creative Wrapper (DFP Premium Only)</h3>
+	<p>Creative wrappers allow you to include custom code across all creatives served in a given ad unit or network. they are the easiest way to ensure that all campaigns running on your site include the Chartbeat tracking script.</p>
+
+	<p><strong>STEP 1:</strong> Create a new Creative Wrapper</p>
+
+	<ol>
+	    <li>Go to the Admin section of DFP and select &#145;Creative Wrappers&#146; under Labels. Then hit the &#145;New Creative Wrapper&#146; button.</li>
+	    <li>Give the wrapper a lable, for example, &#147;Chartbeat Tracking Code&#148;.</li>
+	    <li>Copy and paste the code snippet above into the Footer box.</li>
+	    <li>Ensure that the wrapping order is set to Outer.</li>
+
+	</ol>
+
+	<p><i>In cases where you are using another Creative Wrapper that must be set to Outer, you may alternatively use No Preference for the Chartbeat wrapper.</i></p>
+
+	</p><i>If you are unfamiliar with Creative Wrappers in DFP, you can find more detailed information at <a href="https://support.google.com/dfp_premium/answer/2797762?hl=en" target="_blank">Google's Support Page</a>.</i></p>
+
+	<p>[IMAGE HERE]</p>
+
+	<p><strong>STEP 2:</strong> Apply the Creative Wrapper to all Ad Units on your site</p>
+	<p>The easiest way to do this is going to the Inventory tab, selecting your sitewide ad unit, and adding the Chartbeat creative wrapper in the Label field.</p>
+
+	<h3>Creating a New Creative Template (DFP Premium & Small Business)</h3>
+	<p>Using this method, you will create a new Creative template in DFP that includes the Chartbeat tracking code. When adding creative to a campaign, you must select htis new creative template in order to ensure that it tracks correctly in Chartbeat.</p>
+	<p><strong>STEP 1:</strong> Copy an existing creative template that you use frequently.</p>
+	<p>In the &#145;Orders&#146; tab, click on &#147;Creative Templates&#148; under the Creative heading. Select an existing template and click the Copy button.</p>
+	<p><strong>STEP 2:</strong> Modify the copy with Chartbeat code.</p>
+	<p>Find the copy that you just made and click into it. You&#146;ll want to give it a new name, for example: &#147;Image Banner with Chartbeat&#148;. Then, copy and paste the Chartbeat tracking code into the snippet box. Make sure that the Chartbeat code is added to the end of any existing code in the snippet.</p>
+	<p><i>You will need to repeat Steps 1 &amp; 2 for each Creative template you use in DFP</i></p>
+	<p><strong>STEP 3:</strong> When setting up a new campaign, make sure you use the version of the Creative template that includes the Chartbeat tracking code.</p>
+
+	<h2>Verify Your Implementation</h2>
+	<p>Once you&#146;ve got everything set up for a campaignn, use our debug overlay to verify your implementation. To activate the debug overlay, append the following query paramter to the test URL that you wish to check:</p>
+	<code>?__cb_debug=2</code>
+	<p><i>Note that if the test URL already has multiple query paramters, you should use <code>&amp;__cb_debug=2</i></code>
+	<p>The debug overlay will place a blue border around all ads on the page that Chartbeat is tracking. If the creative tracking code is implemented correctly, the Campaign ID and Creative ID will be displayed for each ad.</p>
+
+</section>
+
+
+<h1>Campaign Tracking with All Ad Servers</h1>
+<p>Chartbeat Advertising is built on top of the existing Chartbeat Publishing code on your site. If you do <strong>not</strong> already have Chartbeat Publishing code on your site, please refer to our <a href="#">Getting Started Guide.</a>
+
+<h2>Ads Served in iFrames</h2>
+<p>In order to track ads served in iFrames you&#146;ll need to add the following tag to the HTML inside the iFrame. Make sure you are generating your own creative and campaign IDs. These attributes should contain values that you want us to track/display on the dashboard (so make them nice and friendly!).</p>
+<pre><code>&#60;div id="chartbeat-ad-data" data-cb-creative-id="put_the_creative_id_here" data-cb-campaign-id="put_the_campaign_id_here"&#62;&#60;/div&#62;
+&#60;script src="//static.chartbeat.com/js/campaign_tracker.js"&#62;&#60;/script&#62;</code></pre>
+<p>Also, please ensure that each iFrame has a unique name. This is important because it allows us to associate the campaign-specific data we&#146;re pulling with the data from the rest of the advertising product. <strong>If there is no id attribute on the iFrame itself, the campaign tracking system will not work.</strong></p>
+
+<h2>Ads NOT Served in iFrames</h2>
+<p>For non-iFrame embedded advertisements, we require the <code>data-cb-campaign-id</code> and <code>data-cb-creative-id</code> attributes to be placed either on the ad container <code>&#60;div&#62;</code> that we are already tracking (via <code>data-cb-ad-id</code>) OR on any element within the ad container <code>&#60;div&#62;</code>.</p>

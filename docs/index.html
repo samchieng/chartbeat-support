@@ -1,0 +1,291 @@
+---
+layout: docs_layout
+title: Documentation
+active: getting_started
+---
+
+
+<h1>Chartbeat Publishing Getting Started Guide</h1>
+
+<menu>
+    <ul>
+        <a href="#introduction"><li>Introduction</li></a>
+        <a href="#ourcode"><li>Our Code</li></a>
+        <a href="#accounts"><li>Accounts, Sybdomains, and Cookies</li></a>
+        <a href="#accounts"><li>Canonical Links and the Path Variable</li></a>
+        <a href="#path"><li>Page Titles, Sections, and Authors</li></a>
+        <a href="#mobile"><li>Mobile Site Implementation</li></a>
+        <a href="#virtual"><li>Virtual Pages, Infinite Scroll, and AJAX</li></a>
+        <a href="#hud"><li>The Heads Up Display and Path Aliasing</li></a>
+    </ul>
+</menu>
+
+<section>
+
+    <h2 id="introduction">Introduction</h2>
+        
+    <p>Chartbeat is a real-time, JavaScript based, web analytics product. Our JavaScript sends tracking pings from your users browsers to our servers, and allows you to monitor traffic and engagement in real time. Installing our code is as simple as adding two small pieces of JavaScript to your web page templates and modifying a few configuration variables.</p> 
+
+    <p>As a bit of background, Chartbeat code (around 3KB) is set to deploy in the <code>window.onload</code> function. As to not slow down site performance, Chartbeat JavaScript is completely asynchronous, and doesn't load until everything else on the page has finished loading. Once loaded, Chartbeat code works like most other web analytics services - it triggers the loading of a beacon image, which returns a 1x1 pixel image (43 bytes).</p>
+
+    <p>Other than that, the Chartbeat code adds a couple of event listeners for registering user engagement.</p>
+
+</section>
+
+
+<section>
+
+    <h2 id="ourcode">Our Code</h2>  
+    
+    <p>Here's an example of our Javascript. There are two parts.</p>
+    
+    <p><b>Part 1</b>: Insert this right after the &#60;head&#62; tag:</p>
+    
+    <pre><code>&#60;script type='text/javascript'&#62;var _sf_startpt=(new Date()).getTime()</script></code></pre>
+    
+    <p><b>Part 2</b>: Insert this script right before the &#60;/body&#62; tag:
+    
+    <pre><code>&#60;script type='text/javascript'&#62;
+    var _sf_async_config = {};
+    /** CONFIGURATION START **/
+    _sf_async_config.uid = #####;
+    _sf_async_config.domain = 'YourDomain.com';
+    _sf_async_config.useCanonical = true;
+    _sf_async_config.sections = 'Change this to your Section name';
+    _sf_async_config.authors = 'Change this to your Author name’;
+    /** CONFIGURATION END **/
+    (function() {
+        function loadChartbeat() {
+            window._sf_endpt = (new Date()).getTime();
+            var e = document.createElement('script');
+            e.setAttribute('language', 'javascript');
+            e.setAttribute('type', 'text/javascript');
+            e.setAttribute('src', '//static.chartbeat.com/js/chartbeat.js');
+            document.body.appendChild(e);
+        }
+        var oldonload = window.onload;
+        window.onload = (typeof window.onload != 'function') ?
+            loadChartbeat : function() {
+                oldonload();
+                loadChartbeat();
+            };
+    })();
+&#60;/script&#62;</code></pre>
+
+    <h3>Important Notes:</h3>
+
+    <p>Tag managers may be used to implement Chartbeat code. However, our JavaScript must still be able to deploy in the window.onload function and should be placed at the end of the &#60;/body&#62; tag.</p> 
+
+</section>
+
+
+<section>
+
+    <h2 id="accounts">Accounts, Subdomains, and Cookies</h2>
+
+    <p>By default the UID variable should be automatically set to your Chartbeat Account number when adding a new site. To retrieve the correct Chartbeat code for your account, head on over to <a href="http://chart.bt/setup">chart.bt/setup</a>. It will look like this:</p>   
+
+    <pre><code>_sf_async_config.uid = #####;</code></pre>
+    
+    <p>Subdomains can be tracked in one of two ways:</p>
+    
+        <ol>
+            <li>If you want to track a subdomain (e.g. "blog.yoursite.com") within an existing Dashboard, simply copy the exact same code that is on the existing domain and add it to the HTML of the subdomain.</li>
+            <li>If you want to track a subdomain separate from your other Chartbeat Publishing Dashboards, select "add site" from the Chartbeat settings page, and follow on-site instructions.</li>
+        </ol>
+   
+    <p>Note: If you are adding a mobile subdomain, please refer to our Mobile Site Implementation for more information.</p>
+    
+
+    <h3>Disabling Cookies:</h3>
+
+    <p>Customers who are subject to the EU e-Privacy Directive, or who would prefer not to use cookies, can set the following variable to prevent Chartbeat from using cookies.</p>
+
+    <pre><code>_sf_async_congfig.noCookies = true;</code></pre>
+
+    <p>Note: By using Chartbeat without cookies, you will be unable to see Visitor Frequency, Conversion Quality, and Return Rates.</p>
+
+    <h2 id="path">Canonical Links and the Path Variable</h2>
+    
+    <p>Does your site use query parameters for various tracking purposes, (e.g. seeing people who came from an email newsletter)? Or does your site have multiple URL structures for the same page/article (e.g. domain.com/section/artcle vs m.domain.com/12345)?</p>
+    
+    <p>By default, Chartbeat is configured to use either the raw path or canonical links (when available). We strongly encourage implementing canonical links to ensure consistent tracking of pages and to prevent seeing multiple listings of the same page in the Chartbeat Dashboard. If you're not familiar with canonical links, check out this helpful <a href="https://support.google.com/webmasters/answer/139066?hl=en&rd=1">article and video</a>.</p>
+    
+    <p>To utilize the canonical feature, you'll need to ensure that your site defines canonical links for each page (e.g &#60;link rel='canonical'.../&#62;) and that the canonical variable is set to "true".</p>
+    
+    <pre><code>_sf_async_config.useCanonical = true;</code></pre>
+    
+    <p>If you are unable or prefer to not use canonical links, you may alternatively set the Path Variable. The path must start with "/"" (forward slash) and we highly recommend that you use a real path used to navigate to this page.</p>
+    
+    <p>The value set for the Path Variable should be generated by your CMS or set to <code>window.location.pathname</code>, so that the same piece of code can be used on all pages.</p>
+    
+    <p>Examples of setting the Path Variable:</p>
+    
+    <pre><code>_sf_async_config.path = "/directory/path";
+_sf_async_config.path = cms.path.variable;
+_sf_async_config.path = window.location.pathname;</code></pre>
+    
+    <p>Important Note:</p>
+    
+    <p>If you are implementing Chartbeat on a separate mobile site (e.g. m.domain.com), please refer to our Mobile Site Implementation section.</p>
+
+</section>
+    
+    
+<section>
+
+    <h2 id="sections">Page Titles, Sections, and Authors</h2>
+        
+    <p>By default Chartbeat displays page titles by using &#60;title&#62; tag in your sites header.</p>
+    
+    <p>However, the title used for a page in Chartbeat can be overridden by setting the Title Variable. This can be useful in the cases where all pages have a common prefix (e.g. "Publication Name: Story Title"), or when most pages share a common site title.</p>
+    
+    <p>You may manually set the Title Variable or populate them dynamically by tying them to a variable in your CMS.</p>
+
+    <p>Here you can set the title like this:</p>
+
+    <pre><code>_sf_async_config.title = "Story Title";
+    _sf_async_config.title = cms.title.variable;</code></pre>
+
+
+    <h3>Configuring Sections and Authors:</h3>
+
+    <p>In Chartbeat Publishing you can filter your content by section or author. To do this the sections and authors variables need to be set properly. So if a page is written by Bob Johnson in the section US Politics, you would set:</p>
+
+    <pre><code>_sf_async_config.sections = "US Politics";
+    _sf_async_config.authors = "Bob Johnson";</code></pre>
+
+    <p>A page can both be in multiple sections and/or have multiple authors, therefore each variable accepts a comma separated list of values. So if a page is co-written by Megan Summers and Kevin Smith in the sections Fashion and Fashion News, you would set:</p>
+
+    <pre><code>_sf_async_config.sections = "Fashion,Fashion News";
+    _sf_async_config.authors = "Megan Summers,Kevin Smith";</code></pre>
+
+    <p>The sections variable does not need to reflect real sections on the site, but should be thought of as groupings of pages that can be filtered on. Our suggestion is to populate these fields dynamically by tying them to a variable in your CMS which globally represents your sections and authors, so they can be easily changed.</p>
+        
+    <pre><code>_sf_async_config.sections = cms.section.variable;
+_sf_async_config.authors = cms.author.variable;</code></pre>
+        
+    <p>You can also populate these variables by using page metadata, a tag that already exists in your code, or part of your URL structure which contains these values.</p>
+
+</section>
+
+
+<section>
+
+    <h2 id="mobile">Mobile Site Implementation</h2>
+
+    <h3>Same Domain and Path</h3>
+    
+    <p>Add the same code from your desktop pages to your mobile pages. As long as the domain and paths are the same, they'll show up in the dashboard as combined entries.</p>
+    
+    <h3>Canonical Links and Different Paths</h3>
+
+    <p>Our best practice for combining mobile and desktop traffic for similar stories is to set the Path Variable on your mobile pages to the full canonical link of the desktop pages.</p>
+
+    <p>The line you will add to your mobile pages will look more or less like this:</p>
+
+    <pre><code>_sf_async_config.path = 'full canonical desktop version for each story';</code></pre>
+
+
+    <h3>No Canonical Links and Different Paths</h3>
+    
+    <p>To combine the mobile and desktop traffic for similar pages, you'll need to configure your Chartbeat implementation to identify the different versions as the same page.</p> 
+
+    <p>The line you will add to your mobile pages should resemble:</p>
+
+    <pre><code>_sf_async_config.path = 'full URL of desktop version for each story';</code></pre>
+
+    <h3>Important Notes</h3>
+    
+    <p>If you are interested in having a separate Chartbeat Dashboard for your mobile site, please have your account administrator add an additional site to your account. Once this is done, you can set the Domain Variable to point to the new Dashboard.</p>
+    
+</section>
+
+
+<section>
+
+    <h2 id="virtual">Virtual Page Changes, Infinite Scroll, and AJAX</h2>
+    
+    <p>If your site uses infinite scroll, serves up content dynamically via AJAX, or pages change without the URL subsequently changing or the DOM refreshing, you'll need to do some additional implementation.</p>
+    
+    <p>Anytime a visitor navigates to a new page or piece of content, you'll need to call a custom variable called <code>pSUPERFLY</code>. This variable is specifically designed for this kind of page change, and can be attached to click/swipe events, or to a pixel that is used to trigger content changes. Best practice would be to make sure the variable is linked to your AJAX call, so they always happen together.</p>
+    
+    <p>You'll need to setup logic to handle these lines of code:</p>
+    
+    <pre><code>_sf_async_config.sections="New Section";
+_sf_async_config.authors="New Author";
+pSUPERFLY.virtualPage("/newpath", "New title");</code></pre>
+
+    <p>Simply put, you're setting the author and section (if they change) ahead of time since we take that data as holdover information when we reload the page with <code>pSUPERFLY</code>. If we are not passed the updated section and author information we'll continue to register the original sections and authors from the previous page. If the new page has no section or author data, simply set that variable to "null". For example:</p>
+    
+    <pre><code>_sf_async_config.authors="";</code></pre>
+
+    <p>Next, when the page changes we'll need to populate the path and title for the new page(s) within the <code>pSUPERFLY</code> variable, so that the pings will reflect the new page the visitor is on.</p>
+   
+    <h3>Important Notes:</h3>
+    
+    <p><code>pSUPERFLY</code> should never be called when a user initially arrives on a page from an external source, and should only be called when a user navigates to subsequent pages without causing the DOM to be refreshed.</p>
+
+    <p>For pages with infinite scroll, any time a visitor is scrolling down to a new page, they will ping on each distinct URL they hit at least once.</p>
+
+</section>
+
+<section>
+
+    <h2 id="hud">The Heads Up Display and Path Aliasing Content</h2>
+    
+    <p>If your site changes URLs when a story is updated, moved into a storyline, or other section of the site, you may need to use the Alias Variable, as these can cause issues for the Heads Up Display. The Alias Variable is used to resolve these issues, which can be identified by incorrect referrer information.</p>
+
+    <p>Before we dive into how to use the <code>_sf_async_config.alias</code> variable, let's first go over just what path aliasing does.</p>
+
+    <p>Think of aliasing as a list. This list has a title and content. The title is a path value, say, <code>/news/politics/article-name-123</code>. That is the path value Chartbeat is receiving in pings from a piece of content. The list items are all of the URLs from which we've received a ping containing that path value. To illustrate the point:</p>
+
+    <pre><code>alias = /news/politics/article-name-123
+url = site.com/news/politics/article-name-123
+url = site.com/article-name-123
+url = site.com/news/politics/article-name-123?campaign=Facebook</code></pre>
+
+    <p>These are all different URLs that lead to the exact same piece of content, and if your implementation is correct, the path value will be the same each time. These URLs should redirect to a single, primary URL, in which case path aliasing shouldn't be an issue.</p>
+
+    <p>You may have vanity URLs that are a bit less clunky and lead to the same content, or your site may use an infinite scroll layout, in which one story leads right to the next. These types of scenarios can cause issues for the Heads Up Display, for which path aliasing is relied upon to report clicks taking place from the homepage to another page on your site.</p> 
+
+    <p>To implement path aliasing, simply set the <code>_sf_async_config.alias</code> variable to the full URL of the link that will lead to it from the homepage, which most likely matches the primary URL. For instance, the alias variable of the example from above would be set to:</p>
+
+    <pre><code>_sf_async_config.alias = "http://site.com/news/politics/article-name-123";</code></pre>
+
+    <h3>Important Notes:</h3>
+    
+    <p>The Path Variable should only be used if you notice incorrect referrer data or click performance in the Heads Up Display. Please refer to Canonical Links and the Path Variable documentation for standard implementation instructions.</p>  
+
+</section>
+
+
+<section>
+
+<h2 id="misc">Additional Information</h2>
+
+<h3>Cookies</h3>
+
+    <p>Chartbeat uses three first-party cookies.</p>
+
+    <ol>
+        <li>The <code>_chartbeat2</code> cookie is used to register if a user has visited the domain before and to calculate visitor frequency.</li>
+        <li>The <code>_chartbeat4</code> cookie stores the state of the last ping when a page is unloaded and is used for accurately calculating engaged time.</li>
+        <li>The <code>_chartbeat5</code> cookie is used by the Heads Up Display to assign traffic to the right link on the page from which someone clicked over.</li>
+    </ol>
+
+    <p>If your site is subject to cookie legislation and you want to prevent the Chartbeat code from using cookies, you can set the <code>noCookies</code> configuration variable.
+
+<h3>Our APIs</h3>
+    <p>Our API is split into two categories based on how the data updates: live and historical. Our live API consists of data that is updated every three seconds, detailing what is happening on your site right now. On the other hand, our historical API consists of data that is more persistent and is a summary of what users are doing over a code of time.</p>
+    <p>For more information on our APIs, check out our <a href= "http://pages.chartbeat.com/support/webinars/apis_101.html">APIs 101 webinar</a>, as well as our <a href="http://pages.chartbeat.com/support/implementation/api_docs.pdf">Live and Historical API Documentation</a>.</p>
+
+</section>
+
+
+
+
+<!-- end content-container -->
+        <a>
+            <button class="download">Click here to download PDF</button>
+        </a>  

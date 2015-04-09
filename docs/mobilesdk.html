@@ -1,0 +1,122 @@
+---
+layout: docs_layout
+title: Documentation
+active: mobilesdk
+---
+
+<menu>
+	<ul>
+		<li>iOS SDK</li>
+		<li>Android SDK</li>
+	</ul>
+</menu>
+
+
+<h1>Chartbeat Mobile SDK Docs</h1>
+
+
+<section>
+
+<h2>iOS SDK</h2>
+
+<p>The 64-bit 8.1 iOS SDK provides a library for iOS applications so they can send tracking beacons to accurately measure user engagement on app views or pages in Chartbeat.</p>
+
+<p>To get started tracking your iOS app, be sure to download the 64-bit iOS SDK <a href="https://s3.amazonaws.com/ios_sdk/chartbeat_ios_sdk_latest.tgz">here</a>.</p>
+
+<h3>Two Things you Need</h3>
+
+<p><b>Your Chartbeat Account ID.</b>Your account ID should match the "UID" included in the Chartbeat code, which has been embedded on your website.</p>
+
+<p><b>Your Host Domain.</b>The host domain should match the domain name you currently use for Chartbeat, e.g. yoursite.com.</p>
+	<h3>Installing the Chartbeat SDK</h3>
+	<ol>
+		<li>Download the Chartbeat SDK</li>
+			<p>After downloading the iOS SDK, unzip it locally and drag the CBTracker.h and libChartbeat-iOSSDK.a into your Xcode project.</p>	
+	</ol>
+	<h3>Getting Started</h3>					
+	<ol>
+		<li>In your UIApplicationDelegate implementation file (.m) import CBTracker.h: #import "CBTracker.h"</li>
+		<li>In the applicationDidBecomeActive method set your configuration variables:</li>
+		<ul>
+			<li>startTrackerWithAccountID: the integer value of your Chartbeat account ID.</li>
+			<li>setDomain: a string of the domain that you’re tracking with Chartbeat. If your desktop site is tracked in Chartbeat as yoursite.com, we recommend you input setDomain to yoursite.com. However, your app data can be sent to a separate dashboard if you prefer.</li>
+		</ul>
+		<p>Your code should look similar to:</p>	
+			<pre><code>[[CBTracker sharedTracker] startTrackerWithAccountID:#####];
+[[CBTracker sharedTracker] setDomain:@"yoursite.com"];</code></pre>
+
+	</ol>
+	<h3>Tracking Views</h3>
+	<p>Each view controller must import CBTracker.h and set authors/sections/zones on the shared pinger instance, and call trackView.</p>
+	<p>When the app switches into a new view, you must call set authors, sections, and zones for the new content. Then, call trackView for the new view and set a viewID and title.</p>
+	<p>You typically want to do this when the view is visible to the user. These methods should be called in the 'viewDidAppear' method.</p>
+	<ol>
+		<li>Call setAuthors, setSections and setZones for the new view.</li>
+		<p>Each of these should be arrays of strings and refer specifically to the new view. If any of these do not apply, just set to an empty array.</p>
+		<p>Authors and sections can take an array with multiple string elements, each of which will show up as an author/section for that view. Note that there can only be one zone for a view.</p>
+		<li>In the applicationDidBecomeActive method set your configuration variables:</li>
+		<ul>
+			<li>startTrackerWithAccountID: the integer value of your Chartbeat account ID.</li>
+			<li>setDomain: a string of the domain that you’re tracking with Chartbeat. If your desktop site is tracked in Chartbeat as yoursite.com, we recommend you input setDomain to yoursite.com. However, your app data can be sent to a separate dashboard if you prefer.</li>
+		</ul>
+		<p>Your code should look similar to:</p>	
+			<pre><code>[[CBTracker sharedTracker] startTrackerWithAccountID:#####];
+[[CBTracker sharedTracker] setDomain:@"yoursite.com"];</code></pre>
+	</ol>
+	<h3>Tracking Video</h3>
+	<ol>
+		<li>In your UIApplicationDelegate implementation file (.m) import CBTracker.h: #import "CBTracker.h"</li>
+		<li>In the applicationDidBecomeActive method set your configuration variables:</li>
+		<ul>
+			<li>startTrackerWithAccountID: the integer value of your Chartbeat account ID.</li>
+			<li>setDomain: a string of the domain that you’re tracking with Chartbeat. If your desktop site is tracked in Chartbeat as yoursite.com, we recommend you input setDomain to yoursite.com. However, your app data can be sent to a separate dashboard if you prefer.</li>
+		</ul>
+		<p>Your code should look similar to:</p>	
+			<pre><code>
+[[CBTracker sharedTracker] startTrackerWithAccountID:#####];
+[[CBTracker sharedTracker] setDomain:@"yoursite.com"];
+			</code></pre>
+	</ol>
+	<h3>Seeing your Data</h3>
+	<p>To see your data, load up your app and head to the Chartbeat Publishing dashboard for the domain you set with setDomain (e.g. internet.com). If the domain does not show in the list, head to <a href="https://chartbeat.com/publishing/setup/code">https://chartbeat.com/publishing/setup/code</a> or contact support@chartbeat.com.</p>
+
+</section>
+
+
+<section>
+
+	<h2>Android SDK</h2>
+
+	<p>The Android SDK for Chartbeat is designed to be a simple, efficient, method of accessing the Chartbeat API from an Android app.</p>
+
+	<p>To get started tracking your iOS app, be sure to download the 64-bit Android SDK <a href="http://pages.chartbeat.com/support/implementation/android_sdk_master.zip">here</a>.</p>
+
+	<h3>Two Things you Need</h3>
+	
+	<p><b>Your Chartbeat Account ID.</b>Your account ID should match the "UID" included in the Chartbeat code, which has been embedded on your website.</p>
+	
+	<p><b>Your Host Domain.</b>The host domain should match the domain name you currently use for Chartbeat, e.g. yoursite.com.</p>
+	
+	<h3>Implementation Instructions</h3>
+	
+	<ol>
+		<li>Download the Chartbeat Android SDK and unzip locally</li>	
+		<li>Call trackView(), setSections(), setAuthors(), and setZones() for a given view.</li>
+			<p>Your code should look similar to:</p>
+			<pre><code>Tracker.trackView(VIEW_ID, VIEW_TITLE);
+Tracker.setSections("technology");
+Tracker.setAuthors("Doug Benedicto,Nick Moy");
+Tracker.setZones("zone/tech");</code></pre>	
+	</ol>
+	
+	<h3>Tracking Views</h3>	
+	
+	<p>By default, your Chartbeat app's data will track in a separate dashboard. However, if the app also has a corresponding website, you will likely want to track your app in the same dashboard in which you can filter just to app traffic, as well as to tablet or mobile specifically.</p>
+	
+	<p>To do this, just make sure to include three arguments in <code>startTrackerWithAccountId()</code> to specify the dashboard domain such as:</p>
+	
+	<pre><code>Tracker.startTrackerWithAccountId(“#####”, "yoursite.com", this);</code></pre>
+	
+	<p>Where the first parameter is your Chartbeat Account UID, the second parameter is your host domain, and the third parameter is the context.</p>
+
+</section>

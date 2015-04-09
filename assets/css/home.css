@@ -1,0 +1,106 @@
+
+@import url('all.css');
+
+
+
+/**************** SUPPORT CENTER HOME ****************/
+
+
+body {
+	background-color: #FAFAFA;
+}
+
+
+
+
+/* MAIN STYLES */
+
+.main h1 {
+	margin: 100px 0 50px 0;
+	font-weight: 300;
+}
+
+.card-main {
+	width: 310px;
+	margin: 10px;
+	padding: 20px 60px;
+}
+
+#docs, #edu, #faq {
+	background-size: 150px;
+	background-repeat: no-repeat;
+	background-position: center 10px;
+}
+
+	#docs {
+		background-image: url('../img/icon_docs.png');
+	}
+
+	#edu {
+		background-image: url('../img/icon_edu.png');
+	}
+
+	#faq {
+		background-image: url('../img/icon_faq.png');
+	}
+
+.card-title {
+		margin: 170px 0 0;
+	}
+
+	.card-title h4 {
+		line-height: 1.4em;
+	}
+
+#docs:hover {
+	background-image: url('../img/icon_docs-white.png');
+}
+
+#edu:hover {
+	background-image: url('../img/icon_edu-white.png');
+}
+
+#faq:hover {
+	background-image: url('../img/icon_faq-white.png');
+}
+
+
+
+
+/* CC TEAM STYLES */
+
+.ccteam {
+	margin: 50px 0 30px;
+}
+
+.ccteam h4 {
+	font-size: 1.15em;
+	line-height: 2em;
+	max-width: 900px;
+	margin: 0 auto;
+}
+
+.ccteam ul {
+	display: inline-block;
+	margin: 40px 0;
+}
+
+	.ccteam li {
+		display: inline-block;
+		margin: 5px;
+	}
+
+	.ccteam li:first-child {
+		margin-left: 0;
+	}
+
+	.ccteam li:last-child {
+		margin-right: 0;
+	}
+
+	.ccpic img {
+		height: 106px;
+		width: 106px;
+		border: 1px solid #EAEAEA;
+		opacity: 0.9;
+	}

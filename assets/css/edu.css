@@ -1,0 +1,191 @@
+@import url("all.css");
+
+
+.green {
+	color: #1EA89D;
+}
+
+
+.theater {
+	width: 100%;
+	background-color: #2F3E4A;
+	padding: 20px 0;
+}
+
+.video-list {
+	background-color: #FAFAFA;
+}
+
+.video {
+	padding: 20px 10px;
+	margin: 20px;
+	border: 1px solid #FFFFFF;
+}
+
+.video img {
+	margin: 10px 0;
+	opacity: 0.4;
+}
+
+.video:hover img {
+	opacity: 1;
+}
+
+
+
+
+
+/* MAIN STYLES */
+
+.main-edu {
+	margin: 40px 0;
+}
+
+.main-edu h4 {
+	line-height: 1.5em;
+}
+
+
+
+/* ***** Video List Stylesheet ***** */
+
+.series {
+	margin: 20px 0;
+	padding: 20px 0;
+}
+	
+.series h3, .series p, .series .video {
+	margin-bottom: 20px;
+}
+
+.edu-left {
+	float: left;
+	max-width: 560px;
+}
+
+.edu-right {
+	float: right;
+	max-width: 560px;
+}
+
+	.float-container:after {
+	  content: "";
+	  display: table;
+	  clear: both;
+	}
+
+.grey-bg {
+	background-color: #F7F8F9;
+}
+
+
+
+
+.time {
+	float: right;
+	margin-left: 2px;   /* check this */
+}
+
+
+
+
+
+/* ***** Individual Video Stylesheet ***** */
+
+.more {
+	padding: 20px 40px;
+}
+
+.more:hover a {
+	color: #FFFFFF;
+}
+
+
+/* CALENDAR STYLES */
+
+.cal-container {
+	margin: 40px -21px;
+}
+
+
+
+
+	.cal {
+		width: 250px;
+		height: 300px;
+		padding: 30px 20px;
+		margin: 10px;
+	}
+
+		.date1, .date2 {
+			text-transform: uppercase;
+			letter-spacing: 1px;
+			font-weight: 700;
+		}
+
+		.date1 {
+			font-size: 12px;
+		}
+
+		.date2 {
+			font-size: 48px;
+			color: #1EA89D;
+			margin: -10px;
+		}
+
+		.webinar {
+			margin: 35px 0;
+		}
+
+		.webinar-info {
+			line-height: 17px;
+		}
+
+	.cal:hover .date2 {
+		color: #FFFFFF;
+	}
+
+
+/* WEBINAR BAND STYLES */
+
+.webinar-signup {
+	width: 100%;
+	background-color: #2E95CE;
+	padding: 15px 0 3px;
+	font-size: 16px;
+	color: #FFFFFF;
+}
+
+
+.webinar-signup button {
+	background-color: #DA3F5F;
+	color: #FFFFFF;
+	margin: 0 10px;
+}
+
+.webinar-signup button:hover {
+	background-color: #D85565;
+	color: #FFFFFF;
+}
+
+
+
+
+
+
+
+/* GLOSSARY STYLES */
+
+section:after {
+	  content: "";
+	  display: table;
+	  clear: both;
+	}
+
+section {
+	margin: 30px 0;
+}
+
+.row {
+	margin: 0;
+}

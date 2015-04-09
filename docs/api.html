@@ -1,0 +1,613 @@
+---
+layout: docs_layout
+title: Documentation
+active: api
+---
+
+<menu>
+	<ul>
+	    <a href="#introduction"><li>Introduction</li></a>
+	    <a href="#toppages"><li>Live Top Pages</li></a>
+	    <a href="#summary"><li>Live Summary</li></a>
+	    <a href="#referrers"><li>Live Referrers</li>
+	    <a href="#recent"><li>Recent Visitors</li></a>
+	    <a href="#topgeo"><li>Live Top Geo</li></a>
+	    <a href="#geo"><li>Live Geo</li></a>
+	    <a href="#quickstats"><li>Live Quickstats</li></a>
+	    <a href="#terms"><li>Live Search Terms</li></a>
+	    <a href="#engseries"><li>Historical Engagement Series</li></a>
+	    <a href="#engstats"><li>Historical Engagement Stats</li></a>
+	    <a href="#socseries"><li>Historical Social Series</li></a>
+	    <a href="#socstats"><li>Historical Social Stats</li></a>
+	    <a href="#trafseries"><li>Historical Traffic Series</li></a>
+	    <a href="#trafstats"><li>Historical Traffic Stats</li></a>
+	    <a href="#videapis"><li>Video APIs</li></a>
+	</ul>
+</menu>
+
+
+<h1>Chartbeat Publishing Live API</h1>
+<h2 id="introduction">Introduction</h2>
+<p>Chartbeat is always collecting data about each visitor on your site, everything from where they came from and how frequently they visit your site, to how long they're spending engaging with your content. Some information is reported raw, such as the number of concurrents on a given article. Other information is mashed up and modified before being reported, such as knowing that a visitor who came from Twitter counts in the "social" traffic source. In the end however, it's all information you want to have about who your audience is.</p>
+<p>Our REST API gives you access to the data that makes up the Chartbeat platform. If you want to uncover specific data, just make an HTTP GET request to an API endpoint and it will return the data encoded in JSON.</p>
+<p>Just as Chartbeat is divided into real-time products and historical reports, our API is split into two categories based on how the data updates: Live and Historical. Our Live API consists of data that is updated every three seconds, detailing what is happening on your site right now. On the other hand, our Historical API consists of summary data that shows how users have behaved over given time spans.</p>
+<p>Get started at <a href="http://api.chartbeat.com">api.chartbeat.com</a>.</p>
+<h3>Required Parameters</h3>
+<p><b>Host Domain</b>This is the domain associated with your Chartbeat account that you want to get data for. For example, yoursite.com.</p>
+<p><b>API Key</b>You can get your API key <a href="https://chartbeat.com/publishing/settings/api-keys/">here</a>. Make sure to select an API key that has access to all calls for your domain.</p>
+<h2 id="toppages">Top Pages</h2>
+<p>This call returns a list of top pages on your site ordered by default based on the number of concurrents.</p>
+<pre><code>http://api.chartbeat.com/live/toppages/v3/?apikey=your_api_key&host=yoursite.com</code></pre>
+<p>Parameters to Specify</p>
+<table>
+	<tr>
+		<td>jsonp</td>
+		<td>The name of a function to wrap the return data in</td>
+	</tr>
+	<tr>
+		<td>limit</td>
+		<td>Number of pages to return (Default returns 10)</td>
+	</tr>
+	<tr>
+		<td>section (CBP only)</td>
+		<td>Return top pages within a section, or multiple sections (e.g. us, news)</td>
+	</tr>
+	<tr>
+		<td>author (CBP only)</td>
+		<td>Return top pages by author, or multiple authors (e.g. kim, joe)</td>
+	</tr>
+	<tr>
+		<td>exclude_people</td>
+		<td>Set a minimum number of concurrents for returned pages. Useful when sorting by engaged time.</td>
+	</tr>
+	<tr>
+		<td>sort_by</td>
+		<td>Parameter to sort your Top Pages by (Default is by most concurrents). Options: engaged_time, new, returning, social, links, internal, direct, search</td>
+	</tr>
+	<tr>
+		<td>now_on</td>
+		<td>Set to 1 to show the recirculation list for article pages</td>
+	</tr>
+	<tr>
+		<td>all_platforms</td>
+		<td>Set to 1 to show the breakdown of desktop, mobile, tablet, and app</td>
+	</tr>
+	<tr>
+		<td>loyalty</td>
+		<td>Set to 1 to show the breakdown of new, returning, and loyal visitors</td>
+	</tr>
+	<tr>
+		<td>types</td>
+		<td>Set to 1 to show the type of page ("Article" or "Landing Page")</td>
+	</tr>
+</table>	
+	<p>Returned Data</p>
+<table>
+	<tr>
+		<td>Engaged_visit [h]</td>
+		<td>Number of concurrents that are engaging with the site</td>
+	</tr>
+	<tr>
+		<td>Engaged_time [h]</td>
+		<td>Number of concurrents that have engaged times that fall within the following time buckets (in seconds): 0-15,15-30,30-45,45-60,60-120,180-240,240-300,300-600,600-900,900+</td>
+	</tr>
+	<tr>
+		<td>Writing_visit [h]</td>
+		<td>Number of concurrents that are writing</td>
+	</tr>
+	<tr>
+		<td>Domload [h]</td>
+		<td>Number of concurrents broken down by how long their DOM took to load that fall within the following time buckets (in seconds): 1-2,2-3,3-4,4-5,5-6,6-7,7-8,8-9,9-10,10+ seconds</td>
+	</tr>
+	<tr>
+		<td>Visit [h]</td>
+		<td>Histogram breakdown of total concurrents</td>
+	</tr>
+	<tr>
+		<td>Scroll [h]</td>
+		<td>Number of concurrents that made it down a certain way of the page-histogram buckets are broken down into 10% intervals of the page.</td>
+	</tr>
+	<tr>
+		<td>People</td>
+		<td>Concurrents</td>
+	</tr>
+	<tr>
+		<td>Visits</td>
+		<td>Concurrents on the page that are reading</td>
+	</tr>
+	<tr>
+		<td>Read</td>
+		<td>Set to 1 to show the breakdown of new, returning, and loyal visitors</td>
+	</tr>
+	<tr>
+		<td>Direct</td>
+		<td>Concurrents from Direct Traffic Sources</td>
+	</tr>
+	<tr>
+		<td>Links</td>
+		<td>Concurrents from Link Traffic sources</td>
+	</tr>
+	<tr>
+		<td>Search</td>
+		<td>Concurrents from Search Traffic Sources</td>
+	</tr>
+	<tr>
+		<td>Internal</td>
+		<td>Concurrents from Internal Traffic Sources</td>
+	</tr>
+	<tr>
+		<td>Social</td>
+		<td>Concurrents from Social Traffic Sources</td>
+	</tr>		
+	<tr>
+		<td>Recirc</td>
+		<td>Total concurrents that have moved on to a second page from an article page</td>
+	</tr>
+	<tr>
+		<td>Subscr</td>
+		<td>The number of people arriving from a web based subscription server (e.g. Google Reader)</td>
+	</tr>
+	<tr>
+		<td>Platform</td>
+		<td>Concurrents by platform type (app, desktop, mobile, tablet)</td>
+	</tr>
+	<tr>
+		<td>Platform_engaged</td>
+		<td>Concurrents that have currently engaging by platform type</td>
+	</tr>
+	<tr>
+		<td>Article</td>
+		<td>If an article page, will return the number of concurrents on that page, else 0</td>
+	</tr>
+	<tr>
+		<td>Toprefs</td>
+		<td>Top referrers for that page</td>
+	</tr>
+	<tr>
+		<td>Crowd</td>
+		<td>Null</td>
+	</tr>
+	<tr>
+		<td>Write</td>
+		<td>Concurrents on the page that are writing</td>
+	</tr>
+	<tr>
+		<td>Num_ref</td>
+		<td>Number of unique referrers</td>
+	</tr>
+	<tr>
+		<td>Idle</td>
+		<td>Number of concurrents that are idle on the page (2+ hours of inactivity)</td>
+	</tr>
+	<tr>
+		<td>New</td>
+		<td>Concurrents that are classified as “new” (i.e. first visit in the last 30 days</td>
+	</tr>
+</table>
+<h2 id="summary">Summary</h2>
+<p>Returns either numeric or categorical summaries of event fields given a host and optional path. Numeric summaries include min, max, sum, nonzero observations, observations and sum of squares. Categorical summaries include field keys with associated counts. This call return real- time data.</p>
+<pre><code>http://api.chartbeat.com/live/summary/v3/?apikey=your_api_key&host=yoursite.com</code></pre>
+<p>Parameters to Specify</p>
+<table>
+	<tr>
+		<td>jsonp</td>
+		<td>The name of a function to wrap the return data in</td>
+	</tr>
+	<tr>
+		<td>keys</td>
+		<td>The keys represent what data to return. To save on space, short names are used for values in several of the real-time API calls. One or a comma separated list of:</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><b>pagetimer</b>: Time to finish loading the dom.</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><b>time_spent</b>: Number of seconds on the page.</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><b>domain</b>: The domain name of the document (what's in the browser bar)</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><b>uid</b>: The chartbeat account.</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><b>host</b>: The reported domain (the dashboard the data goes to).</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><b>title</b>: Page title.</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><b>new</b>: First time visitor for the site in the last 30 days.</td>
+	</tr>		
+	<tr>
+		<td></td>
+		<td><b>path</b>: Path of the page from location.pathname.</td>
+	</tr>		
+	<tr>
+		<td></td>
+		<td><b>referrer<b/>: Referrer from document.referrer.</td>
+	</tr>		
+	<tr>
+		<td></td>
+		<td><b>token</b>: Temporary uuidevent's page session (regenerated when moving to another page).</td>
+	</tr>		
+	<tr>
+		<td></td>
+		<td><b>user</b>: User token.</td>
+	</tr>		
+	<tr>
+		<td></td>
+		<td><b>window_height</b>: window.innerHeight or document.body.offsetHeight.</td>
+	</tr>		
+	<tr>
+		<td></td>
+		<td><b>scroll_top</b>: window.pageYOffset or document.body.scrollTop or document.documentElement.scrollTop</td>
+	</tr>		
+	<tr>
+		<td></td>
+		<td><b>page_height</b>: document.body.scrollHeight.</td>
+	</tr>		
+	<tr>
+		<td></td>
+		<td><b>read</b>: The number of people reading.</td>
+	</tr>		
+	<tr>
+		<td></td>
+		<td><b>write</b>: The number of people writing.</td>
+	</tr>		
+	<tr>
+		<td></td>
+		<td><b>idle</b>: The number of people idle.</td>
+	</tr>		
+	<tr>
+		<td>path</td>
+		<td>Returns data for a specific path</td>
+</table>	
+<h2 id="referrers">Referrers</h2>
+<p>Returns the list of top referrers for a specific domain.</p>
+<pre><code>http://api.chartbeat.com/live/referrers/v3/?apikey=your_api_key&host=yoursite.com</code></pre>
+<p>Parameters to Specify</p>
+<table>
+	<tr>
+		<td>jsonp</td>
+		<td>The name of a function to wrap the return data in</td>
+	</tr>
+	<tr>
+		<td>limit</td>
+		<td>The total number of referrers to return</td>
+	</tr>
+	<tr>
+		<td>path</td>
+		<td>Returns data for a specific path</td>
+	</tr>
+	<tr>
+		<td>by_type</td>
+		<td>Set to 1 to show the breakdown of referrer information by traffic source</td>
+	</tr>
+</table>
+<h2 id="recent">Recent Visitors</h2>
+<p>Returns information about the most recent visitors for a specific domain.</p>
+<pre><code>http://api.chartbeat.com/live/recent/v3/?apikey=your_api_key&host=yoursite.com</code></pre>
+<p>Parameters to Specify</p>
+<table>
+	<tr>
+		<td>jsonp</td>
+		<td>The name of a function to wrap the return data in</td>
+	</tr>
+	<tr>
+		<td>limit</td>
+		<td>The total number of referrers to return</td>
+	</tr>
+	<tr>
+		<td>path</td>
+		<td>Returns data for a specific path</td>
+	</tr>
+</table>
+<h2 id="geo">Geo</h2>
+<p>Returns real-time geographic information by location segment.</p>
+<pre><code>http://api.chartbeat.com/live/top_geo/v1/?apikey=your_api_key&host=yoursite.com</code></pre>
+<p>Parameters to Specify</p>
+<table>
+	<tr>
+		<td>jsonp</td>
+		<td>The name of a function to wrap the return data in</td>
+	</tr>
+	<tr>
+		<td>limit</td>
+		<td>Number of pages to return (Default returns 10)</td>
+	</tr>
+</table>		
+<h2 id="quickstats">Quickstats</h2>
+<p>Returns information about the most recent visitors for a specific domain.</p>
+<pre><code>http://api.chartbeat.com/live/quickstats/v4/?apikey=your_api_key&host=yoursite.com</code></pre>
+<p>Parameters to Specify</p>
+<table>
+	<tr>
+		<td>jsonp</td>
+		<td>The name of a function to wrap the return data in</td>
+	</tr>
+	<tr>
+		<td>limit</td>
+		<td>Number of pages to return (Default returns 10)</td>
+	</tr>
+	<tr>
+		<td>path</td>
+		<td>Returns data for a specific path</td>
+	</tr>
+	<tr>
+		<td>now_on</td>
+		<td>Set to 1 to show the recirculation list for article pages</td>
+	</tr>
+	<tr>
+		<td>all_platforms</td>
+		<td>Set to 1 to show the breakdown of desktop, mobile, tablet, and app</td>
+	</tr>
+	<tr>
+		<td>loyalty</td>
+		<td>Set to 1 to show the breakdown of new, returning, and loyal visitors</td>
+	</tr>
+	<tr>
+		<td>types</td>
+		<td>Set to 1 to show the type of page (“Article” or “Landing Page”)</td>
+	</tr>
+</table>
+<h2 id="terms">Search Term</h2>
+<p>This call returns a list of search terms being passed by ordered by default based on the number of concurrents.</p>
+<pre><code>http://api.chartbeat.com/live/search_term/?host=yoursite.com&apikey=your_api_key</code></pre>
+<p>Parameters to Specify</p>
+<table>
+	<tr>
+		<td>jsonp</td>
+		<td>The name of a function to wrap the return data in</td>
+	</tr>
+	<tr>
+		<td>limit</td>
+		<td>Number of pages to return (Default returns 10)</td>
+	</tr>
+</table>
+<h1>Chartbeat Publishing Historical API</h1>
+<h2 id="engseries">Engagement Series</h2>
+<p>Returns snapshots of engaged seconds over a period of time based on set frequency or limit intervals.</p>
+<pre><code>http://api.chartbeat.com/historical/engagement/series/?apikey=your_api_key&host=yoursite.com</code></pre>
+<p>Parameters to Specify</p>
+<table>
+	<tr>
+		<td>jsonp</td>
+		<td>The name of a function to wrap the return data in</td>
+	</tr>
+	<tr>
+		<td>human</td>
+		<td>Set ‘true’ to return human readable time stamps, in EST only</td>
+	</tr>
+	<tr>
+		<td>start, end</td>
+		<td>Input options: YYYY-MM-DD%20HH:MM:SS (24-hour EST only) or Unix timestamps</td>
+	</tr>
+	<tr>
+		<td>limit</td>
+		<td>Number of snapshots to return within set time span</td>
+	</tr>
+	<tr>
+		<td>days_ago</td>
+		<td>Can be used instead of start and end parameters, most recent date to __ days ago</td>
+	</tr>
+	<tr>
+		<td>frequency</td>
+		<td>Set to 1 to show the breakdown of new, returning, and loyal visitor</td>
+	</tr>		
+</table>
+<h2 id="engstats">Engagement Stats</h2>
+<p>Returns summary stats of engaged seconds over a period of time.</p>
+<pre><code>http://api.chartbeat.com/historical/engagement/stats/?apikey=your_api_key&host=yoursite.com</code></pre>
+<p>Parameters to Specify</p>
+<table>
+	<tr>
+		<td>jsonp</td>
+		<td>The name of a function to wrap the return data in</td>
+	</tr>
+	<tr>
+		<td>human</td>
+		<td>Set ‘true’ to return human readable time stamps, in EST only</td>
+	</tr>
+	<tr>
+		<td>start, end</td>
+		<td>Input options: YYYY-MM-DD%20HH:MM:SS (24-hour EST only) or Unix timestamps</td>
+	</tr>
+	<tr>
+		<td>limit</td>
+		<td>Number of snapshots to return within set time span</td>
+	</tr>
+	<tr>
+		<td>days_ago</td>
+		<td>Can be used instead of start and end parameters, most recent date to __ days ago</td>
+	</tr>
+	<tr>
+		<td>frequency</td>
+		<td>Set to 1 to show the breakdown of new, returning, and loyal visitor</td>
+	</tr>		
+</table>
+<h2 id="socseries">Social Series</h2>
+<p>Returns series of social activity over a period of time.</p>
+<pre><code>http://api.chartbeat.com/historical/social/series/?apikey=your_api_key&host=yoursite.com</code></pre>
+<p>Parameters to Specify</p>
+<table>
+	<tr>
+		<td>jsonp</td>
+		<td>The name of a function to wrap the return data in</td>
+	</tr>
+	<tr>
+		<td>human</td>
+		<td>Set ‘true’ to return human readable time stamps, in EST only</td>
+	</tr>
+	<tr>
+		<td>start, end</td>
+		<td>Input options: YYYY-MM-DD%20HH:MM:SS (24-hour EST only) or Unix timestamps</td>
+	</tr>
+	<tr>
+		<td>fields=tw_url_mentions</td>
+		<td>Returns the number of times your site’s URL is mentioned on Twitter</td>
+	</tr>
+	<tr>
+		<td>limit</td>
+		<td>Number of snapshots to return within set time span</td>
+	</tr>
+	<tr>
+		<td>days_ago</td>
+		<td>Can be used instead of start and end parameters, most recent date to __ days ago</td>
+	</tr>
+	<tr>
+		<td>frequency</td>
+		<td>Set to 1 to show the breakdown of new, returning, and loyal visitor</td>
+	</tr>
+</table>
+<h2 id="socstats">Social Stats</h2>
+<p>Returns summary stats of engaged seconds over a period of time.</p>
+<pre><code>http://api.chartbeat.com/historical/social/stats/?apikey=your_api_key&host=yoursite.com</code></pre>
+<p>Parameters to Specify</p>
+<table>
+	<tr>
+		<td>jsonp</td>
+		<td>The name of a function to wrap the return data in</td>
+	</tr>
+	<tr>
+		<td>human</td>
+		<td>Set ‘true’ to return human readable time stamps, in EST only</td>
+	</tr>
+	<tr>
+		<td>start, end</td>
+		<td>Input options: YYYY-MM-DD%20HH:MM:SS (24-hour EST only) or Unix timestamps</td>
+	</tr>
+	<tr>
+		<td>fields=tw_url_mentions</td>
+		<td>Returns the number of times your site’s URL is mentioned on Twitter</td>
+	</tr>
+	<tr>
+		<td>limit</td>
+		<td>Number of snapshots to return within set time span</td>
+	</tr>
+	<tr>
+		<td>days_ago</td>
+		<td>Can be used instead of start and end parameters, most recent date to __ days ago</td>
+	</tr>
+</table>		
+<h2 id="trafseries">Traffic Series</h2>
+<p>Returns traffic sources and concurrents data summarized over the given timespan.</p>
+<pre><code>http://api.chartbeat.com/historical/traffic/series/?apikey=your_api_key&host=yoursite.com</code></pre>
+<p>Parameters to Specify</p>
+<table>
+	<tr>
+		<td>jsonp</td>
+		<td>The name of a function to wrap the return data in</td>
+	</tr>
+	<tr>
+		<td>human</td>
+		<td>Set ‘true’ to return human readable time stamps, in EST only</td>
+	</tr>
+	<tr>
+		<td>start, end</td>
+		<td>Input options: YYYY-MM-DD%20HH:MM:SS (24-hour EST only) or Unix timestamps</td>
+	</tr>
+	<tr>
+		<td>limit</td>
+		<td>Number of snapshots to return within set time span</td>
+	</tr>
+	<tr>
+		<td>days_ago</td>
+		<td>Can be used instead of start and end parameters, most recent date to __ days ago</td>
+	</tr>
+	<tr>
+		<td>frequency</td>
+		<td>Set to 1 to show the breakdown of new, returning, and loyal visitor</td>
+	</tr>
+	<tr>
+		<td>fields</td>
+		<td>One or a comma separated list of:</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><b>return</b>: the number of returning visitors.</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><b>new</b>: the number of new visitors.</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><b>people</b>: the number of people on the domain.</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><b>read</b>: the number of people reading on the domain.</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><b>domload</b>: the DOM load time.</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><b>write</b>: the number of people writing on the domain.</td>
+	</tr>	
+	<tr>
+		<td></td>
+		<td><b>idle</b>: the number of people idle on the domain.</td>
+	</tr>	
+	<tr>
+		<td></td>
+		<td><b>internal</b>: the number of people coming from an internal referrer.</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><b>social</b>: the number of people coming from social services.</td>
+	</tr>												
+</table>
+<h2 id="trafstats">Traffic Stats</h2>
+<p>Returns traffic sources and concurrents data summarized over the given timespan.</p>
+<pre><code>http://api.chartbeat.com/historical/traffic/stats/?apikey=your_api_key&host=yoursite.com</code></pre>
+<p>Parameters to Specify</p>
+<table>
+	<tr>
+		<td>jsonp</td>
+		<td>The name of a function to wrap the return data in</td>
+	</tr>
+	<tr>
+		<td>human</td>
+		<td>Set ‘true’ to return human readable time stamps, in EST only</td>
+	</tr>
+	<tr>
+		<td>start, end</td>
+		<td>Input options: YYYY-MM-DD%20HH:MM:SS (24-hour EST only) or Unix timestamps</td>
+	</tr>
+	<tr>
+		<td>properties</td>
+		<td>Summary stats to return (min,max,avg,median)</td>
+	</tr>
+	<tr>
+		<td>days_ago</td>
+		<td>Can be used instead of start and end parameters, most recent date to __ days ago</td>
+	</tr>
+	<tr>
+		<td>fields</td>
+		<td>One or a comma separated list of</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><b>people</b>: the number of people on the domain</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><b>internal</b>: the number of people coming from an internal referrer.</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><b>social</b>: the number of people coming from social services.</td>
+	</tr>
+</table>
+<a>
+	<button class="download">Click here to download PDF</button>		 
+</a>

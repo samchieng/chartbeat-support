@@ -1,0 +1,67 @@
+---
+layout: default
+categories: edu
+---
+
+<link href="../assets/css/edu.css" rel="stylesheet" type='text/css'>
+
+
+<div class="page-hero">
+    <div class="container-fluid">
+        <div class="hero-left">
+        <h1>Learn Tips &amp; Best Practices.</h1>
+        <p>Dive into our education resources and best practice videos to take your Chartbeat usage to the next level to best capitalize on real-time opportunities.</p>
+        </div>
+        <div class="hero-right">
+            <img src="../assets/img/icon_edu.png">
+        </div>
+    </div>
+</div>
+
+
+<div class="subnav">
+    <div class="container-fluid">
+        <ul>
+             {% if page.active == "3min" %}
+                <a href="../edu/"><li class="active">3 Minute Series</li></a>
+            {% else %}
+                <a href="../edu/"><li>3 Minute Series</li></a>
+            {% endif %}
+
+            {% if page.active == "crashcourse" %}
+                <a href="#"><li class="active">Crash Course</li></a>
+            {% else %}
+                <a href="#"><li>Crash Course</li></a>
+            {% endif %}
+            
+            {% if page.active == "goingfurther" %}
+                <a href="#"><li class="active">Going Further</li></a>
+            {% else %}
+                <a href="#"><li>Going Further</li></a>
+            {% endif %}
+            
+            {% if page.active == "schedule" %}
+                <a href="../edu/schedule.html"><li class="active green">Schedule</li></a>
+            {% else %}
+                <a href="../edu/schedule.html"><li class="green">Schedule</li></a>
+            {% endif %}
+            
+            {% if page.active == "glossary" %}
+                <a href="../edu/glossary.html"><li class="active">Glossary</li></a>
+            {% else %}
+                <a href="../edu/glossary.html"><li>Glossary</li></a>
+            {% endif %}
+            
+        </ul>
+    </div>
+</div>
+
+
+
+	    {{ content }}
+
+
+
+   
+
+</div>

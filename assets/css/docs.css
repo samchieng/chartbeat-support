@@ -1,0 +1,144 @@
+@import url('all.css');
+
+
+/************************* DOCS ******************************/
+
+h1 {
+	font-size: 1.5em;
+}
+
+h2 {
+	font-size: 1.3em;
+}
+
+h3 {
+	font-size: 1.1em;
+}
+
+p {
+	font-size: 16px;
+}
+
+
+.content {
+	max-width: 670px;
+	margin: 50px auto;
+	}
+
+	.content a {
+	color: #1EA89D;
+	font-weight: 600;
+	}
+
+	.content a:hover {
+		color: #007572;
+	}
+
+section {
+	margin: 60px 0;
+}
+
+section h2 {
+	margin-bottom: 25px;
+}
+
+section p {
+	margin-bottom: 20px;
+}
+
+
+
+
+/* MENU */
+
+
+
+.menu li {
+	padding: 5px 0;
+}
+
+.sublist {
+	margin-bottom: 15px;
+}
+
+.menu .section a {
+	font-size: 14px;
+	font-weight: bold;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	color: #444444;
+}
+
+.subsections {
+	display: none;
+}
+
+.menu a {
+	color: #666666;
+}
+
+.menu a:hover {
+	color: #999999;
+}
+
+
+/* MAIN */
+
+.main {
+	max-width: 1200px;
+	margin: 60px auto 40px;
+}
+
+.main:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+
+/* CONTENT */
+
+
+
+/*.content h1 {
+	margin: 60px 0 20px;
+}
+
+.content h1:first-child {
+	margin-top: 0;
+}
+
+.content h2 {
+	margin: 40px 0 20px;
+}
+
+.content h3 {
+	margin: 30px 0 20px;
+}*/
+
+
+
+code {
+	color: #2E95CE;
+	background-color: #FFFFFF;
+}
+
+pre {
+	border: none;
+	border-radius: 0px;
+	background-color: #F7F8F9;
+	margin: 15px 0 25px;
+}
+
+.download {
+	background-color: #359DE0;
+	color: #FFFFFF;
+	margin: 20px 0;
+	padding: 10px 15px;
+	border-radius: 5px;
+	border: none;
+}
+
+.download:hover {
+	background-color: #2883B4;
+}

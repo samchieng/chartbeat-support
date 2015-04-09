@@ -1,0 +1,652 @@
+---
+layout: docs_layout
+title: Documentation
+active: video
+---
+
+<menu>
+    <ul>
+        <li>Introduction</li>
+        <li>Brightcove</li>
+        <li>Brightcove Perform</li>
+        <li>Flowplayer</li>
+        <li>HTML5</li>
+        <li>JW Player</li>
+        <li>Kaltura</li>
+        <li>Ooyala</li>
+        <li>ThePlatform</li>
+        <li>YouTube</li>
+        <li>JavaScript SDK</li>
+        <li>iFrame Instructions</li>
+    </ul>
+</menu>
+
+
+
+<h1>Chartbeat Publishing Video Docs</h1>
+
+
+<section>
+
+    <h2>Brightcove</h2>
+    <p>To start tracking Brightcove videos in Chartbeat, you'll need to install two plug-ins for both Flash and HTML5 instances. If you know you're only using one type of player, you only need to install the one you are using.</p>
+    <h3>Two Things You Need</h3>
+    <ul>
+        <li>Your Account ID for Chartbeat Publishing</li>
+        <p>Your account ID should match the "UID" included in the Chartbeat code, which has been embedded on your website.</p>
+        <li>The Host Domain for Chartbeat Publishing</li>
+        <p>The host domain should match the domain name you currently use for Chartbeat Publishing, e.g. yoursite.com.</p>
+    </ul>
+    <h3>Implementation Instructions</h3>
+    <ol>
+        <li>
+            <p>Determine the plug-in URLs</p>
+            
+            <p>There are two plug-ins that you'll need to enter your Accout ID ("UID") and Host Domain for.</p>
+            
+            <p><strong>Flash Plug-in</strong></p>
+        
+            <pre><code>http://static.chartbeat.com/swf/ChartbeatModule.swf?acctId=&#60;account_id&#62;&hostId=video@&#60;domain.com&#62;</code></pre>
+        
+            <p><strong>JavaScript Plug-in (HTML5)</strong></p>
+        
+            <pre><code>http://static.chartbeat.com/js/chartbeat_video.js?uid=&#62;&hostId=video@&#60;domain.com&#62;</code></pre>
+        </li>
+        
+        <li>
+            <p>Select your players you want to track within the Brightcove Platform</p>
+        
+            <p>Head on over to the Brightcove console (http://my.brightcove.com), select "Publishing" from the navigation bar, double-click on the player you'd like Chartbeat to track and then select the "Plugins" tab on the left-hand side.</p>
+        </li>
+
+        <li>
+            <p>Add the plug-in URLs to the individual players</p>
+            
+            <p>Enter both URLs you created in Step 1, click "Add" and it should populate in the list of URLs directly below. Hit "Save Changes" and- boom!- you're ready to go. Repeat Steps 2 and 3 for each player you'd like Chartbeat to track.</p>
+        </li>
+        
+        <li>
+            <p>Include the playerdomain variable in the regular Chartbeat code</p>
+            
+            <p>If you deploy Brightcove players on your site within an iframe, you'll need to add one additional line in the existing Chartbeat script. On the parent page which has the &#60;iframe&#62; tag, include the playerdomain variable within the Chartbeat config code. This is the brightcove domain the player is loaded from:</p>
+
+            <pre><code>_sf_async_config.playerdomain = 'c.brightcove.com';</code></pre>
+        </li>
+    
+    </ol>
+    
+    <h3>Checking your Work</h3>
+    
+    <p>You should have two URL plug-ins per video, which will be able to track both Flash and HTML5 renderings that look like this:</p>
+    
+    <p>Flash Plug-in</p>
+    
+    <pre><code>http://static.chartbeat.com/swf/ChartbeatModule.swf?acctId=12345&hostId=video@yoursite.com</code></pre>
+    
+    <p>JavaScript Plug-in (HTML5)</p>
+
+    <pre><code>http://static.chartbeat.com/js/chartbeat_video.js?uid=12345&domain=video@yoursite.com</code></pre>
+    <p>The complete Chartbeat code on the parent page, should resemble:</p>
+    <pre><code>&#60;script type='text/javascript'&#62;
+    var _sf_async_config = {};
+    /** CONFIGURATION START **/
+    _sf_async_config.uid = 12345;
+    _sf_async_config.domain = 'yoursite.com';
+    _sf_async_config.useCanonical = true;
+    _sf_async_config.playerdomain = 'c.brightcove.com';
+    _sf_async_config.sections = 'section1,section2';
+    _sf_async_config.authors = 'author1,author2';
+    /** CONFIGURATION END **/
+    (function() {
+        function loadChartbeat() {
+            window._sf_endpt = (new Date()).getTime();
+            var e = document.createElement('script');
+            e.setAttribute('language', 'javascript');
+            e.setAttribute('type', 'text/javascript');
+            e.setAttribute('src', '//static.chartbeat.com/js/chartbeat.js');
+            document.body.appendChild(e);
+        }
+        var oldonload = window.onload;
+        window.onload = (typeof window.onload != 'function') ?
+            loadChartbeat : function() {
+                oldonload();
+                loadChartbeat();
+            };
+    })();
+    &#60;/script&#62;</code></pre>
+
+</section>
+
+<h2>Brightcove Perform</h2>
+<p>Beta Release - to start tracking Brightcove Perform (https://www.brightcove.com/en/perform) videos, you’ll need to add the Chartbeat Video Pinger and update the title attribute in the video tag.</p>
+<h3>Implementation Instructions</h3>
+<ol>
+    <li>Add the Chartbeat Video Pinger in the iframe</li>
+    <p>In the iframe content page where the player loads, include the Chartbeat Video Pinger (<code>chartbeat_video.js</code>). This embed technique is the same as the standard Chartbeat script, just link to <code>static.chartbeat.com/js/chartbeat_video.js</code> instead of <code>static.chartbeat.com/js/chartbeat.js</code>. The <code>chartbeat_video.js</code> file includes both Publishing and Video tracking capabilities. You can leave out the other optional config variables.</p>
+    <li>Add a title attribute to the HTML video element</li>
+    <p>In the &#60;video&#62; tag on the page, include an attribute for the title of the video. Brightcove is working on updating their API so we can grab it directly, but right now we'll be grabbing it from the HTML, which should resemble:</p>
+    <pre><code>
+            &#60;video title='Your Video' src='yourmovie.mp4'&#62;
+            </code></pre>
+    <li>Include the playerdomain config variable on the main page</li>
+    <p>If you’re implementing in an &#60;iframe&#62;, you'll need to include the playerdomain variable within the Chartbeat config code. This is the Brightcove domain the player is loaded from:</p>
+    <pre><code>
+            _sf_async_config.playerdomain = 'players.brightcove.net';
+            </code></pre>
+</ol>
+<h3>Additional Notes</h3>
+<p>Not implementing in an iframe? Just replace the <code>chartbeat.js</code> file with <code>chartbeat_video.js</code> in your current Chartbeat code as described in Step 1.</p>
+<h3>Checking your Work</h3>
+<p>Your Chartbeat code within the iframe should look like:</p>
+<pre><code>
+&#60;script type='text/javascript'&#62;
+    var _sf_async_config = {};
+    /** CONFIGURATION START **/
+    _sf_async_config.uid = 12345;
+    _sf_async_config.domain = 'yoursite.com';
+    /** CONFIGURATION END **/
+    (function() {
+        function loadChartbeat() {
+            window._sf_endpt = (new Date()).getTime();
+            var e = document.createElement('script');
+            e.setAttribute('language', 'javascript');
+            e.setAttribute('type', 'text/javascript');
+            e.setAttribute('src', '//static.chartbeat.com/js/chartbeat_video.js');
+            document.body.appendChild(e);
+        }
+        var oldonload = window.onload;
+        window.onload = (typeof window.onload != 'function') ?
+            loadChartbeat : function() {
+                oldonload();
+                loadChartbeat();
+            };
+    })();
+&#60;/script&#62;           
+</code></pre>
+<p>The Chartbeat code on the parent page (outside the iframe) should look like:</p>
+<code><pre>
+&#60;script type='text/javascript'&#62;
+    var _sf_async_config = {};
+    /** CONFIGURATION START **/
+    _sf_async_config.uid = 12345;
+    _sf_async_config.domain = 'yoursite.com';
+    _sf_async_config.useCanonical = true;
+    _sf_async_config.sections = 'section1,section2';
+    _sf_async_config.authors = 'author1,author2';
+    _sf_async_config.playerdomain = 'media.yoursite.com';
+    /** CONFIGURATION END **/
+    (function() {
+        function loadChartbeat() {
+            window._sf_endpt = (new Date()).getTime();
+            var e = document.createElement('script');
+            e.setAttribute('language', 'javascript');
+            e.setAttribute('type', 'text/javascript');
+            e.setAttribute('src', '//static.chartbeat.com/js/chartbeat.js');
+            document.body.appendChild(e);
+        }
+        var oldonload = window.onload;
+        window.onload = (typeof window.onload != 'function') ?
+            loadChartbeat : function() {
+                oldonload();
+                loadChartbeat();
+            };
+    })();
+&#60;/script&#62;
+</pre></code>
+
+<h2>Flowplayer</h2>
+<p>If you're using Flowplayer as your video platform, you'll need to include the "title" and "poster" attributes, and change the Chartbeat Pinger to the Chartbeat Video Pinger.</p>
+<h3>Implementation Instructions</h3>
+<ol>
+    <li>Include the "title" and "poster" attributes in the HTML/DOM</li>
+    <p>These attributes populate the title and thumbnail images in the Chartbeat Video Dashboard. The "title" attribute must be added to the parent &#60;div&#62;, while the "poster" attribute can be in either the &#60;video&#62; tag or the parent &#60;div&#62;. So a sample video tag might look like the following:</p>
+    <pre><code>
+&#60;div data-swf='//releases.flowplayer.org/5.4.3/flowplayer.swf' class='flowplayer no-toggle' data-ratio='0.416' data-engine='flash' title='Video Title'&#62;
+    &#60;video poster='http://yoursite.com/thumbnail.jpg'&#62;
+        &#60;source src='http://yoursite.com/videos/movie.mp4' type='video/ mp4'&#62;
+    &#60;/video&#62;
+&#60;/div&#62;
+</code></pre>
+    <p>The other option looks like the following:</p>
+    <pre><code>
+&#60;div data-swf='//releases.flowplayer.org/5.4.3/flowplayer.swf' class='flowplayer no-toggle' data-ratio='0.416' data-engine='flash' title='Video Title' poster='http://yoursite.com/thumbnail.jpg'&#62;
+    &#60;video&#62;
+        &#60;source src='http://yoursite.com/videos/video.mp4' type='video/mp4'&#62;
+    &#60;/video&#62;
+&#60;/div&#62;</code></pre>                      
+        <li>Change <code>chartbeat.js</code> to <code>chartbeat_video.js</code></li>
+            <p>In order to use the Video Pinger, you must modify the Chartbeat code already on your site. You'll want to switch the Chartbeat code to load <code>chartbeat_video.js</code> instead of <code>chartbeat.js</code>. The <code>chartbeat_video.js</code> file includes both Publishing and Video tracking capabilities.</p>
+            <pre><code>
+            e.setAttribute('src', '//static.chartbeat.com/js/chartbeat_video.js');
+            </code></pre>
+</ol>
+<h3>Checking your Work</h3>
+<p>Your complete Chartbeat code will look something like this:</p>
+<pre><code>
+&#60;script type='text/javascript'&#62;
+    var _sf_async_config = {};
+    /** CONFIGURATION START **/
+    _sf_async_config.uid = 12345;
+    _sf_async_config.domain = 'yoursite.com';
+    _sf_async_config.useCanonical = true;
+    _sf_async_config.sections = 'section1,section2';
+    _sf_async_config.authors = 'author1,author2';
+    /** CONFIGURATION END **/
+    (function() {
+        function loadChartbeat() {
+            window._sf_endpt = (new Date()).getTime();
+            var e = document.createElement('script');
+            e.setAttribute('language', 'javascript');
+            e.setAttribute('type', 'text/javascript');
+            e.setAttribute('src', '//static.chartbeat.com/js/chartbeat_video.js');
+            document.body.appendChild(e);
+        }
+        var oldonload = window.onload;
+        window.onload = (typeof window.onload != 'function') ?
+            loadChartbeat : function() {
+                oldonload();
+                loadChartbeat();
+            };
+    })();
+&#60;/script&#62;
+</code></pre>
+
+<h2>HTML5</h2>
+<p>If you use the HTML5 video element to embed your videos, you'll need to add "title" and "poster" attributes to the HTML/DOM, and change the Chartbeat Pinger to the Chartbeat Video Pinger.</p>
+<h3>Implementation Instructions</h3>
+<ol>
+    <li>Include the "title" and "poster" attributes in the HTML/DOM</li>
+    <p>These attributes populate the title and thumbnail images in the Chartbeat Video Dashboard. You'll need to add the "title" and "poster" attributes to the &#60;video&#60; tag. For example:</p>
+    <pre><code>
+&#60;video src='yourmovie.mp4' title='Video Title' poster='http://yoursite.com/
+thumbnail.jpg'&#62;
+</code></pre>
+    <li>Change <code>chartbeat.js</code> to <code>chartbeat_video.js</code></li>
+    <p>In order to use the Video Pinger, you must modify the Chartbeat code already on your site. You'll want to switch the Chartbeat code to load <code>chartbeat_video.js</code> instead of <code>chartbeat.js</code>. The <code>chartbeat_video.js</code> file includes both Publishing and Video tracking capabilities.</p>
+    <pre><code>e.setAttribute('src', '//static.chartbeat.com/js/chartbeat_video.js');</code></pre>
+</ol>
+<h3>Checking your Work</h3>
+<p>Your complete Chartbeat code will look something like this:</p>
+<pre><code>
+&#60;script type='text/javascript'&#62;
+    var _sf_async_config = {};
+    /** CONFIGURATION START **/
+    _sf_async_config.uid = 12345;
+    _sf_async_config.domain = 'yoursite.com';
+    _sf_async_config.useCanonical = true;
+    _sf_async_config.sections = 'section1,section2';
+    _sf_async_config.authors = 'author1,author2';
+    /** CONFIGURATION END **/
+    (function() {
+        function loadChartbeat() {
+            window._sf_endpt = (new Date()).getTime();
+            var e = document.createElement('script');
+            e.setAttribute('language', 'javascript');
+            e.setAttribute('type', 'text/javascript');
+            e.setAttribute('src', '//static.chartbeat.com/js/chartbeat_video.js');
+            document.body.appendChild(e);
+        }
+        var oldonload = window.onload;
+        window.onload = (typeof window.onload != 'function') ?
+            loadChartbeat : function() {
+                oldonload();
+                loadChartbeat();
+            };
+    })();
+&#60;/script&#62;
+</code></pre>
+
+<h2>JW Player</h2>
+<p>If you're using JW Player as your video platform, you'll need to change the Chartbeat Pinger to the Chartbeat Video Pinger and include Title and Thumbnail attributes in your code.</p>
+<h3>Implementation Instructions</h3>
+<ol>
+    <li>Include the JW Player attributes "title" and "image" in each video</li>
+    <p>This will populate the titles and thumbnails in your Video Dashboard. Your code should look similar to:</p>
+    <pre><code>
+jwplayer("myElement").setup({
+    file: "http://www.yoursite.com/video/movie.mp4",
+    title: "JW Video Example"
+    image: "http://www.yoursite.com/image/thumbnail.jpg"
+});
+</code></pre>
+    <li>Change <code>chartbeat.js</code> to <code>chartbeat_video.js</code></li>
+    <p>In order to use the Video Pinger, you must modify the Chartbeat code already on your site. You'll want to switch the Chartbeat code to load <code>chartbeat_video.js</code> instead of <code>chartbeat.js</code>. The <code>chartbeat_video.js</code> file includes both Publishing and Video tracking capabilities.</p>
+    <pre><code>e.setAttribute('src', '//static.chartbeat.com/js/chartbeat_video.js');</code></pre>
+</ol>
+<h3>Additional Notes</h3>
+<p>If you load your videos after the page has loaded (e.g. video loads when someone presses "play?"), you'll need to manually push the video object to Chartbeat to start tracking. Just call the lines below immediately after your video loads:</p>
+<pre><code>
+    window._cbv = window._cbv || [];
+    window._cbv.push(jwplayer);
+    </code></pre>
+<h3>Checking your Work</h3>
+<p>Your complete Chartbeat code will look something like this:</p>
+<pre><code>
+&#60;script type='text/javascript'&#62;
+    var _sf_async_config = {};
+    /** CONFIGURATION START **/
+    _sf_async_config.uid = 12345;
+    _sf_async_config.domain = 'yoursite.com';
+    _sf_async_config.useCanonical = true;
+    _sf_async_config.sections = 'section1,section2';
+    _sf_async_config.authors = 'author1,author2';
+    /** CONFIGURATION END **/
+    (function() {
+        function loadChartbeat() {
+            window._sf_endpt = (new Date()).getTime();
+            var e = document.createElement('script');
+            e.setAttribute('language', 'javascript');
+            e.setAttribute('type', 'text/javascript');
+            e.setAttribute('src', '//static.chartbeat.com/js/chartbeat_video.js');
+            document.body.appendChild(e);
+        }
+        var oldonload = window.onload;
+        window.onload = (typeof window.onload != 'function') ?
+            loadChartbeat : function() {
+                oldonload();
+                loadChartbeat();
+            };
+    })();
+&#60;/script&#62;
+</code></pre>
+
+<h2>Kaltura</h2>
+<p>Description</p>
+<h3>Implementation Instructions</h3>
+<ol>
+    <li>Change <code>chartbeat.js</code> to <code>chartbeat_video.js</code></li>
+    <p>In order to use the Video Pinger, you must modify the Chartbeat code already on your site. You'll want to switch the Chartbeat code to load <code>chartbeat_video.js</code> instead of <code>chartbeat.js</code>. The <code>chartbeat_video.js</code> file includes both Publishing and Video tracking capabilities.</p>
+    <pre><code>e.setAttribute('src', '//static.chartbeat.com/js/chartbeat_video.js');</code></pre>
+    <li>Step Two</li>
+    <p>More about Step Two</p>
+</ol>
+<h3>Additional Notes</h3>
+<h3>Checking your Work</h3>
+<p>Your complete Chartbeat code will look something like this:</p>
+<pre><code>
+&#60;script type='text/javascript'&#62;
+    var _sf_async_config = {};
+    /** CONFIGURATION START **/
+    _sf_async_config.uid = 12345;
+    _sf_async_config.domain = 'yoursite.com';
+    _sf_async_config.useCanonical = true;
+    _sf_async_config.sections = 'section1,section2';
+    _sf_async_config.authors = 'author1,author2';
+    /** CONFIGURATION END **/
+    (function() {
+        function loadChartbeat() {
+            window._sf_endpt = (new Date()).getTime();
+            var e = document.createElement('script');
+            e.setAttribute('language', 'javascript');
+            e.setAttribute('type', 'text/javascript');
+            e.setAttribute('src', '//static.chartbeat.com/js/chartbeat_video.js');
+            document.body.appendChild(e);
+        }
+        var oldonload = window.onload;
+        window.onload = (typeof window.onload != 'function') ?
+            loadChartbeat : function() {
+                oldonload();
+                loadChartbeat();
+            };
+    })();
+&#60;/script&#62;
+</code></pre>
+
+<h2>Ooyala</h2>
+<p>If you're using Ooyala as your video platform, you'll just need to modify the Ooyala embed code and the existing Chartbeat code.</p>
+<h3>Implementation Instructions</h3>
+<ol>
+    <li>Modify the Ooyala embed code</li>
+    <p>The standard embed code for Ooyala does not expose the player to the Chartbeat pinger, so in order to start tracking video performance, you just need two lines of code inside the 'onCreate' event provided by Ooyala. Find the following code, and add the portion highlighted in green:</p>
+    <pre><code>
+OO.ready(function() {
+    OO.Player.create('element_id', 'account_id', {
+        onCreate: function(player) {
+            var _cbv = window._cbv || (window._cbv = []);
+            _cbv.push(player);
+        }
+    });
+});
+</code></pre>
+    <li>Modify the Chartbeat code</li>
+    <p>Within the current Chartbeat code on the page, you’ll need to make two adjustments.</p>
+    <p>Part A: Add the video type line to the configuration section</p>
+    <pre><code>_sf_async_config.videoType = 'ooyala';</code></pre>
+    <p>Part B: Change <code>chartbeat.js</code> to <code>chartbeat_video.js</code></p>
+    <p>In order to use the Video Pinger, you must modify the Chartbeat code already on your site. You'll want to switch the Chartbeat code to load <code>chartbeat_video.js</code> instead of <code>chartbeat.js</code>. The <code>chartbeat_video.js</code> file includes both Publishing and Video tracking capabilities.</p>
+    <pre><code>e.setAttribute('src', '//static.chartbeat.com/js/chartbeat_video.js');</code></pre>
+</ol>
+<h3>Checking your Work</h3>
+<p>Your complete Chartbeat code will look something like this:</p>
+<pre><code>
+&#60;script type='text/javascript'&#62;
+    var _sf_async_config = {};
+    /** CONFIGURATION START **/
+    _sf_async_config.uid = 12345;
+    _sf_async_config.domain = 'yoursite.com';
+    _sf_async_config.useCanonical = true;
+    _sf_async_config.videoType = 'ooyala';
+    _sf_async_config.sections = 'section1,section2';
+    _sf_async_config.authors = 'author1,author2';
+    /** CONFIGURATION END **/
+    (function() {
+        function loadChartbeat() {
+            window._sf_endpt = (new Date()).getTime();
+            var e = document.createElement('script');
+            e.setAttribute('language', 'javascript');
+            e.setAttribute('type', 'text/javascript');
+            e.setAttribute('src', '//static.chartbeat.com/js/chartbeat_video.js');
+            document.body.appendChild(e);
+        }
+        var oldonload = window.onload;
+        window.onload = (typeof window.onload != 'function') ?
+            loadChartbeat : function() {
+                oldonload();
+                loadChartbeat();
+            };
+    })();
+&#60;/script&#62;
+</code></pre>
+
+<h2>ThePlatform</h2>
+<p>If you're using thePlatform as your video platform, you'll just need to install a plug-in to start tracking your videos in Chartbeat.</p>
+<h3>Implementation Instructions</h3>
+<ol>
+    <li>Determine the plug-in URLs</li>
+    <p>Replace your Account ID and Host Domain into the plug-in and add the following line into thePlatform's player code.</p>
+    <p>HTML5 (JS) Plug-in</p>
+    <pre><code>tp:plugin1=“type=tracking|URL=http://static.chartbeat.com/js/chartbeat_video.js|priority=1"</code></pre>
+    <p>Flash Plug-in</p>
+    <pre><code>tp:plugin1="type=tracking|URL=http://static.chartbeat.com/swf/ChartbeatPDK.swf|acctId=&#60;account_id&#62;|appId=video@&#60;domain.com&#62;|priority=1"</code></pre>
+    <p>The Flash plug-in requires your Account Id (which you can find <a href="https://chartbeat.com/docs/account_id/">here</a>) and your site’s domain.</p>
+</ol>
+<h3>Additional Notes</h3>
+<p>If your videos are embedded in an iframe on the page, which is common with thePlatform, the iframe is probably hosted on www.theplatform.com. As a result, on the main page itself- not in the iframe- you will need to add the following line in the Chartbeat code’s configuration section:</p>
+<pre><code>_sf_async_config.playerdomain = 'player.theplatform.com';</code></pre>
+<h3>Checking your Work</h3>
+
+<h2>YouTube</h2>
+<p>To start tracking YouTube Videos (using the new &#60;iframe&#62; embed style that supports both Flash and HTML5 videos), you'll need to use the YouTube API and modify the current Chartbeat code.</p>
+<h3>Implementation Instructions</h3>
+<ol>
+    <li>Link to the YouTube JavaScript API</li>
+    <p>Add this script, which grants access to the YouTube API, to the &#60;head&#62; section for any page with video.</p>
+    <pre><code>&#60;script type='text/javascript' src='//www.youtube.com/player_api?ver=3.9.2'&#62;&#60;/script&#62;</code></pre>
+    <li>Enable JavaScript API access to your YouTube embeds</li>
+    <p>Chartbeat’s code needs to communicate with the YouTube videos to track them, so you’ll need to enable JavaScript access. This is easily done by adding a single query parameter (“enablejsapi=1”) to your YouTube embed URL. For example:</p>
+    <pre><code>&#60;iframe width="420" height="315" src=“//www.youtube.com/embed/_OBlgSz8sSM?enablejsapi=1" frameborder="0" allowfullscreen&#62;&#60;/iframe&#60;</code></pre>
+    <p>Note that in the above code uses a single query parameter. If your URL already has other options set, you can add the enablejsapi parameter after the others by using an ampersand ("&amp;") as a separator. For example:</p>
+    <pre><code>&#60;iframe width="420" height="315" src=“//www.youtube.com/embed/_OBlgSz8sSM?autohide=1&enablejsapi=1" frameborder="0" allowfullscreen&#62;&#60;/iframe&#62;</code></pre>
+    <li>Push the YouTube Video to Chartbeat and Update the Pinger</li>
+        <p>Within the current Chartbeat code on the page, you’ll need to make two adjustments.</p>
+        <p>Part A: Change <code>chartbeat.js</code> to <code>chartbeat_video.js</code></p>
+        <p>In order to use the Video Pinger, you must modify the Chartbeat code already on your site. You’ll want to switch the Chartbeat code to load <code>chartbeat_video.js</code> instead of <code>chartbeat.js</code>. The <code>chartbeat_video.js</code> file includes both Publishing and Video tracking capabilities.</p>
+        <pre><code>e.setAttribute('src', '//static.chartbeat.com/js/chartbeat_video.js');</code></pre>
+    <p>Part B: Add these lines to tell Chartbeat to autodetect the YouTube iframes</p>
+    <pre><code>var _cbv = window._cbv || (window._cbv = []);_cbv.push(['autoDetectYouTubeIframes']);</code></pre>
+</ol>
+<h3>Checking your Work</h3>
+<p>Your complete Chartbeat code will look something like this:</p>
+<pre><code>
+&#60;script type='text/javascript'&#62;
+var _sf_async_config = {};
+/** CONFIGURATION START **/
+_sf_async_config.uid = 12345;
+_sf_async_config.domain = 'yoursite.com';
+_sf_async_config.useCanonical = true;
+_sf_async_config.sections = 'section1,section2';
+_sf_async_config.authors = 'author1,author2';
+/** CONFIGURATION END **/
+(function() {
+    function loadChartbeat() {
+            window._sf_endpt = (new Date()).getTime();
+            var e = document.createElement('script');
+            e.setAttribute('language', 'javascript');
+            e.setAttribute('type', 'text/javascript');
+            e.setAttribute('src', '//static.chartbeat.com/js/chartbeat_video.js');
+            document.body.appendChild(e);
+        }
+        /** TELL CHARTBEAT TO AUTODETECT YOUTUBE VIDEOS **/
+    var _cbv = window._cbv || (window._cbv = []);
+    _cbv.push(['autoDetectYouTubeIframes']);
+    var oldonload = window.onload;
+    window.onload = (typeof window.onload != 'function') ?
+        loadChartbeat : function() {
+            oldonload();
+            loadChartbeat();
+        };
+})();
+&#60;/script&#62;
+</code></pre>
+<h2>Javascript Video SDK</h2>
+<p>The primary task in implementing the JavaScript SDK is to define a JavaScript Class-referred to as a strategy-which interfaces with your native video API to return values measured by the Chartbeat Publishing Video platform. These include values such as video state (playing, stopped, completed, etc.), video duration, video thumbnail, playhead position, and so on.</p>
+<h3>Reference Files</h3>
+<p>Download the SDK Files <a href="http://pages.chartbeat.com/support/implementation/chartbeat_js_video_sdk.zip">here</a>.</p>
+<p><b>SIMPLIFIED_STRATEGY.JS</b> is a template for creating a strategy class with no external dependencies. The comments in the code explains what each of the methods in the strategy class need to do.</p>
+<p><b>STRATEGY_INTERFACE.JS</b> is a Google Closure implementation of the strategy interface. If you’re using Google Closure, it defines all the required methods for you. Using Google Closure is not a requirement if you use the <code>simplified_strategy.js</code> as a basis for your object.</p>
+<p><b>STRATEGY_HTML_PLAYER.JS</b> is an example file showing how Chartbeat implemented the video strategy constructor for HTML5 video players.</p>
+<h3>Implementation Instructions</h3>
+<ol>
+    <li>Push your video strategy to _cbv_strategies</li>
+    <p>On each page with embedded video, you will need to push your video strategy constructor—as customized in <code>strategy_interface.js</code> — so that Chartbeat's pinger can use it to watch for video events. For the constructor, “CUSTOM_STRATEGY_CONSTRUCTOR”, you would push the constructor like this:</p>
+    <pre><code>window['_cbv_strategies'] = window['_cbv_strategies'] || []; 
+                window['_cbv_strategies'].push(CUSTOM_STRATEGY_CONSTRUCTOR);</code></pre>
+    <p>As a note, make sure to push your video strategy constructor to <code>_cbv_strategies</code> synchronously, <b>before</b> Chartbeat's pinger (<code>chartbeat_video.js</code>) loads.</p>
+    <li>Push your video object to _cbv</li>
+    <p>Whenever a new video player loads on the page, push the video object to _cbv. This should come after you’ve pushed your video strategy constructor, as in Step 1. For each individual video player, push the video object as below:</p>
+    <pre><code>var _cbv = window._cbv || (window._cbv = []); _cbv.push(player);</code></pre>
+    <p>Make sure to do this for each player that loads. So if a single page has two separate video players, you’ll need to push twice. However, if the same video player switches to a new video, you do not need to make this push, as the strategy interface should take care of new video loads.</p>
+    <li>Change <code>chartbeat.js</code> to <code>chartbeat_video.js</code></li>
+    <p>In order to use the Video Pinger, you must modify the Chartbeat code already on your site. You'll want to switch the Chartbeat code to load <code>chartbeat_video.js</code> instead of <code>chartbeat.js</code>. The <code>chartbeat_video.js</code> file includes both Publishing and Video tracking capabilities.</p>
+    <pre><code>
+                e.setAttribute('src', '//static.chartbeat.com/js/chartbeat_video.js');
+                </code></pre>
+</ol>
+<h3>Additional Notes</h3>
+<p>If you want to minify/obfuscate the code for your strategy JS file, make sure that you <b>do not</b> minify the method names, as Chartbeat’s pinger looks for those method names specifically.</p>
+<h3>Checking your Work</h3>
+<p>Your complete Chartbeat code will look something like this:</p>
+<pre><code>
+    &#60;script type=‘text/javascript '&#62;
+    window['_cbv_strategies '] = window['_cbv_strategies '] || [];
+    window['_cbv_strategies '].push(MyStrategy());
+    var _cbv = window._cbv || (window._cbv = []);
+    _cbv.push(MyPlayer);
+    var _sf_async_config={};
+    /** CONFIGURATION START **/
+    _sf_async_config.uid = 12345;
+    _sf_async_config.domain = 'yoursite.com ';
+    _sf_async_config.useCanonical = true;
+    _sf_async_config.sections = 'section1,section2 ';
+    _sf_async_config.authors = 'author1,author2 ';
+    /** CONFIGURATION END **/
+    (function(){
+     function loadChartbeat() {
+     window._sf_endpt = (new Date()).getTime();
+     var e = document.createElement('script ');
+     e.setAttribute('language ', 'javascript ');
+     e.setAttribute('type ', 'text/javascript ');
+     e.setAttribute('src ', '//static.chartbeat.com/js/chartbeat_video.js ');
+     document.body.appendChild(e);
+     }
+     var oldonload = window.onload;
+     window.onload = (typeof window.onload != 'function ') ?
+     loadChartbeat : function() { oldonload(); loadChartbeat(); };
+     })();
+    &#60;/script&#62;
+    </code></pre>
+<h2>Iframe Instructions</h2>
+<p>If you deploy any of your video players in iframes, you’ll need to add one extra line into the configuration section of the existing Chartbeat code.</p>
+<h3>Implementation Instructions</h3>
+<ol>
+    <li>Add the Chartbeat Video Pinger in the iframe</li>
+    <p>In the iframe content page where the player loads, include the Chartbeat Video Pinger (chartbeat_video.js). This embed technique is the same as the standard Chartbeat script, just link to static.chartbeat.com/js/chartbeat_video.js instead of static.chartbeat.com/js/chartbeat.js. The chartbeat_video.js file includes both Publishing and Video tracking capabilities. You can leave out the other optional config variables.</p>
+    <li>Set the playerdomain variable</li>
+    <p>On the main page—not within the iframe—add the following line into the existing Chartbeat Publishing code’s configuration section:</p>
+    <pre><code>
+                _sf_async_config.playerdomain = '&#60;player domain&#62;';
+                </code></pre>
+    <p>As an example: Let's say you have a video link on your homepage, and that link opens an iframe with a video player in it. Also, let's say that video player is hosted on a subdomain, media.yoursite.com. Your Chartbeat Publishing code on the homepage must then include the following line:</p>
+    <pre><code>
+                _sf_async_config.playerdomain = 'media.yoursite.com';
+                </code></pre>
+</ol>
+<h3>Checking your Work</h3>
+<p>Your Chartbeat code within the iframe should look like:</p>
+<pre><code>
+    &#60;script type='text/javascript'&#62;
+        var _sf_async_config = {};
+        /** CONFIGURATION START **/
+        _sf_async_config.uid = 12345;
+        _sf_async_config.domain = 'yoursite.com';
+        /** CONFIGURATION END **/
+        (function() {
+            function loadChartbeat() {
+                window._sf_endpt = (new Date()).getTime();
+                var e = document.createElement('script');
+                e.setAttribute('language', 'javascript');
+                e.setAttribute('type', 'text/javascript');
+                e.setAttribute('src', '//static.chartbeat.com/js/chartbeat_video.js');
+                document.body.appendChild(e);
+            }
+            var oldonload = window.onload;
+            window.onload = (typeof window.onload != 'function') ?
+                loadChartbeat : function() {
+                    oldonload();
+                    loadChartbeat();
+                };
+        })();
+    &#60;/script&#62;
+    </code></pre>
+<p>The Chartbeat code on the parent page (outside the iframe) should look like:</p>
+<pre><code>
+    &#60;script type='text/javascript'&#62;
+        var _sf_async_config = {};
+        /** CONFIGURATION START **/
+        _sf_async_config.uid = 12345;
+        _sf_async_config.domain = 'yoursite.com';
+        _sf_async_config.useCanonical = true;
+        _sf_async_config.sections = 'section1,section2';
+        _sf_async_config.authors = 'author1,author2';
+        _sf_async_config.playerdomain = 'media.yoursite.com';
+        /** CONFIGURATION END **/
+        (function() {
+            function loadChartbeat() {
+                window._sf_endpt = (new Date()).getTime();
+                var e = document.createElement('script');
+                e.setAttribute('language', 'javascript');
+                e.setAttribute('type', 'text/javascript');
+                e.setAttribute('src', '//static.chartbeat.com/js/chartbeat.js');
+                document.body.appendChild(e);
+            }
+            var oldonload = window.onload;
+            window.onload = (typeof window.onload != 'function') ?
+                loadChartbeat : function() {
+                    oldonload();
+                    loadChartbeat();
+                };
+        })();
+    &#60;/script&#62;
+    </code></pre>
+</div>
+</div>

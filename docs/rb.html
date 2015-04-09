@@ -1,0 +1,249 @@
+---
+layout: docs_layout
+title: Documentation
+active: rb
+---
+
+<menu>
+	<ul>
+	    <li>Introduction</li>
+	    <li>Required Parameters</li>
+	    <li>Metrics</li>
+	    <li>Filter</li>
+	    <li>Group By</li>
+	</ul>
+</menu>
+
+
+<h1>Report Builder</h1>
+<h2>Introduction</h2>
+	<p>The Chartbeat Report Builder is designed for analysts and researchers to create and subscribe to custom historical reports about their audience and content. While the Dashboard excels at presenting real-time actionable data, the Report Builder offers the chance to take your data one step further.</p>
+	<p>The tool offers a wide array of metrics, filters, and groups that can be used by both analytics and editorial teams to track audience and content data over time. With the Report Builder interface, not only can you elect to receive these reports in your inbox, but you’ll have access to an archive of all the reports you’ve created. It’s easy to copy this data into your own pivot tables to organize your data however you need.</p>
+	<p>Get started at <a href="http://chartbeat.com/report/builder">chartbeat.com/report/builder</a>.</p>
+<h2>Required Parameters</h2>
+	<p><b>Report Type</b></p>
+	<p>There are two report types to pick from: a one time report, which creates a single CSV file to be downloaded or sent via email, and a recurring report – which you can subscribe to and receive it in your inbox on a daily, weekly, or monthly basis. Note that daily reports look at the past day of data, weekly reports look at the past week, and monthly look at the past month.</p>
+	<p><b>Date Range</b></p>
+	<p>The date range specifies time frame you want to pull from for your report. You can select a preset range of the past 7 days, 31 days, the previous 24 hours, or a you can create a custom date range with the calendar box.</p>
+	<p><b>Site</b></p>
+	<p>The site field is the domain that you want to create a report for. Note that you may only select domains that your Chartbeat login has access to.</p>
+<h2>Metrics</h2>
+<p>The metrics parameter identifies which audience and site data points you want returned in your report. Any given query may include multiple metrics to create comprehensive reports.</p>
+<table>
+	<tr>
+		<td>Average Scroll</td>
+		<td>The average maximum depth that visitors have scrolled to, in pixels, from the top of the page.</td>
+	</tr>
+	<tr>
+		<td>Average Engaged Time</td>
+		<td>The average amount of time in seconds visitors actively spent on a page.</td>
+	</tr>
+	<tr>
+		<td>Scroll Starts</td>
+		<td>The percentage of page views where a scroll event occurred, expressed as a decimal.</td>
+	</tr>
+	<tr>
+		<td>Total Engaged Time</td>
+		<td> The total amount of time in seconds spent actively on a page across sites.</td>
+	</tr>
+	<tr>
+		<td>Unique Cookies</td>
+		<td>A count of the number of unique cookies who visited the page.</td>
+	</tr>
+	<tr>
+		<td>Page Views</td>
+		<td>A count of the number of page views.</td>
+	</tr>
+</table>
+<h2>Filter</h2>
+<p>Adding a filter to your report allows you to specify a variable you’d like to focus on. Use the filter parameter to dive deeper into your historical metrics and create reports that reflect specific audience breakdowns.</p>
+<table>
+	<tr>
+		<td>Browser</td>
+		<td>The web browser used.</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td>Android</td>
+	</tr>	
+	<tr>
+		<td></td>
+		<td>Chrome</td>
+	</tr>	
+	<tr>
+		<td></td>
+		<td>Blackberry</td>
+	</tr>	
+	<tr>
+		<td></td>
+		<td>Unknown</td>
+	</tr>	
+	<tr>
+		<td></td>
+		<td>Firefox</td>
+	</tr>	
+	<tr>
+		<td></td>
+		<td>Safari</td>
+	</tr>	
+	<tr>
+		<td></td>
+		<td>Internet Explorer</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td>Opera</td>
+	</tr>		
+	<tr>
+		<td>Demographics</td>
+		<td>If your site sends Chartbeat custom demographic values they will appear under this demo field (unique to your domain).</td>
+	</tr>
+	<tr>
+		<td>Demo_type</td>
+		<td>Demographic type (unique to your domain).</td>
+	</tr>
+	<tr>
+		<td>Device</td>
+		<td>The device used.</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td>Mobile</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td>Desktop</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td>Tablet</td>
+	</tr>	
+	<tr>
+		<td>Page Path</td>
+		<td>The reported path of the page (unique to your domain).</td>
+	</tr>		
+	<tr>
+		<td>Section</td>
+		<td>The section of a site visited (unique to your domain).</td>
+	</tr>		
+	<tr>
+		<td>Subdomain</td>
+		<td>The specific subdomain (unique to your domain).</td>
+	</tr>
+	</table>
+<h2>Group By</h2>
+<p>Use the group by parameter to select the criteria for which your metrics are returned, such as time of day, geographic location, demographic, and page specific data. Adding additional groups allows you to create more dynamic reports.</p>
+<table>			
+	<tr>
+		<td>Author</td>
+		<td>The author of a page.</td>
+	</tr>						
+	<tr>
+		<td>Browser</td>
+		<td>The web browser used. </td>
+	</tr>		
+	<tr>
+		<td>City</td>
+		<td>The city the visitor was in.</td>
+	</tr>		
+	<tr>
+		<td>Client-side Day</td>
+		<td>The calendar day, according to the timezone set by the visitor.</td>
+	</tr>		
+	<tr>
+		<td>Client-side Hour</td>
+		<td>The hour of the day (0-23), according to the timezone set by the visitor.</td>
+	</tr>		
+	<tr>
+		<td>Client-side Minute</td>
+		<td>The minute, according to the timezone set by the visitor.</td>
+	</tr>		
+	<tr>
+		<td>Content Type</td>
+		<td>The content type (e.g. gallery, article) as <a href="http://support.chartbeat.com/customer/portal/articles/1898614-how-can-i-tag-my-pages-with-content-types-?b_id=195">tagged on your site</a>.</td>
+	</tr>		
+	<tr>
+		<td>Country</td>
+		<td>The country the visitor was in.</td>
+	</tr>		
+	<tr>
+		<td>Demographics</td>
+		<td>If your site sends Chartbeat custom demographic values they will appear under this demo field (unique to your domain).</td>
+	</tr>		
+	<tr>
+		<td>Device</td>
+		<td>The device used.</td>
+	</tr>		
+	<tr>
+		<td>Internal Referrer</td>
+		<td>The page path that users clicked off from when they traveled to a new page. Useful for learning about historical click-through data.</td>
+	</tr>		
+	<tr>
+		<td>Operating System</td>
+		<td>The operating system used.</td>
+	</tr>		
+	<tr>
+		<td>Page Load Histogram</td>
+		<td>Histogram of the page load time.</td>
+	</tr>		
+	<tr>
+		<td>Page Type</td>
+		<td>The type of page, returned as either article, landing page, or unknown.</td>
+	</tr>		
+	<tr>
+		<td>Page Width Histogram</td>
+		<td>Width of the page in pixels (50 pixels bins). Useful when analyzing responsive designs.</td>
+	</tr>		
+	<tr>
+		<td>Page Path</td>
+		<td>The reported path of the page.</td>
+	</tr>		
+	<tr>
+		<td>Referrer</td>
+		<td>The referring domain.</td>
+	</tr>		
+	<tr>
+		<td>Referrer Type</td>
+		<td>The page referrer type: social, search, direct, internal, and links.</td>
+	</tr>		
+	<tr>
+		<td>Region</td>
+		<td>The region the visitor was in (returns states for US)</td>
+	</tr>		
+	<tr>
+		<td>Scroll Depth Histogram</td>
+		<td>Histogram of the number of pixels scrolled.</td>
+	</tr>		
+	<tr>
+		<td>Subdomain</td>
+		<td>The specific subdomain.</td>
+	</tr>		
+	<tr>
+		<td>Section</td>
+		<td>The section of a site visited.</td>
+	</tr>		
+	<tr>
+		<td>Sponsor</td>
+		<td>The sponsor ID. Note that this is only available to domains that are using Paid Content tracking.</td>
+	</tr>		
+	<tr>
+		<td>Engaged Time Histogram</td>
+		<td>Histogram of active engaged time (15 second bins)</td>
+	</tr>		
+	<tr>
+		<td>New/Returning </td>
+		<td>Returns 1 for new visitors and 0 for returning.</td>
+	</tr>	
+	<tr>
+		<td>Day (in UTC)</td>
+		<td>The calendar day in the UTC time zone.</td>
+	</tr>	
+	<tr>
+		<td>Hour (in UTC)</td>
+		<td>The hour of the day (0-23) in the UTC time zone. Can be used with day (in UTC) to get hourly time series.</td>
+	</tr>	
+	<tr>
+		<td>Minute (in UTC)</td>
+		<td>The minute in the UTC time zone. Use paired with hour (in UTC) to get per-minute time series.</td>
+	</tr>	
+</table>

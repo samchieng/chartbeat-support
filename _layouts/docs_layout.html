@@ -1,0 +1,76 @@
+---
+layout: default
+categories: docs, cbp
+---
+
+<link href="../assets/css/docs.css" rel="stylesheet" type='text/css'>
+
+
+<div class="page-hero">
+    <div class="container-fluid">
+        <div class="hero-left">
+        <h1>All the steps to get up and running.</h1>
+        <p>Browse our implementation docs and methodology reports to make sure that your Chartbeat code is setup for your specific site design and technical needs.</p>
+        </div>
+        <div class="hero-right">
+            <img src="../assets/img/icon_docs.png">
+        </div>
+    </div>
+</div>
+
+
+<div class="subnav">
+    <div class="container-fluid">
+        <ul>
+            
+            {% if page.active == "getting_started" %}
+                <a href="../docs/"><li class="active">Getting Started</li></a>
+            {% else %}
+                <a href="../docs/"><li>Getting Started</li></a>
+            {% endif %}
+
+            {% if page.active == "headline" %}
+                <a href="#"><li class="active">Headline Testing</li></a>
+            {% else %}
+                <a href="#"><li>Headline Testing</li></a>
+            {% endif %}
+            
+            {% if page.active == "video" %}
+                <a href="../docs/video.html"><li class="active">Video</li></a>
+            {% else %}
+                <a href="../docs/video.html"><li>Video</li></a>
+            {% endif %}
+            
+            {% if page.active == "mobilesdk" %}
+                <a href="../docs/mobilesdk.html"><li class="active">Mobile SDKs</li></a>
+            {% else %}
+                <a href="../docs/mobilesdk.html"><li>Mobile SDKs</li></a>
+            {% endif %}
+            
+            {% if page.active == "rb" %}
+                <a href="../docs/rb.html"><li class="active">Report Builder</li></a>
+            {% else %}
+                <a href="../docs/rb.html"><li>Report Builder</li></a>
+            {% endif %}
+            
+            {% if page.active == "api" %}
+                <a href="../docs/api.html"><li class="active">APIs</li></a>
+            {% else %}
+                <a href="../docs/api.html"><li>APIs</li></a>
+            {% endif %}
+
+        </ul>
+    </div>
+</div>
+
+
+
+<div class="container-fluid">
+
+    <div class="content">
+
+    {{ content }}
+
+    </div>
+
+</div>

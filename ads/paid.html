@@ -1,0 +1,20 @@
+---
+layout: docs_ads_layout
+title: Ads Documentation
+active: paid
+categories: docs, ads
+---
+
+<h1>Paid Content</h1>
+
+<p>Included in the Chartbeat Publishing suite is a tool that allows you to measure page-level engagement on paid content pieces for optimization and reporting purposes. For any page you wish to track with our paid content product, please add the <code>sponsorName</code> property to the <code>_sf_async_config</code> object on that page:</p>
+
+<pre><code>_sf_async_config.sponsorName = "INSERT_SPONSOR_NAME_HERE";</code></pre>
+
+<p>Like sections, authors, and zone, you will need to dynamically populate the <code>sponsorName</code> value for each page. 
+
+<p><i>Please <strong>DO NOT</strong> include the <code>sponsorName</code> property on pages that are not paid content.</i></p>
+
+<p>Data for paid content is organized by unique URL path. Since promotional efforts for paid content tend to apend UTM tags and other additioal URL query paramters, please ensure that you are defining a canonical link on all paid content pages.</p>
+
+<p>For more info, see <a href="https://support.google.com/webmasters/answer/139066" target="_blank">Google's guide to Canonical Links</a>.</p>
