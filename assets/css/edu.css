@@ -93,7 +93,7 @@
 /* ***** Individual Video Stylesheet ***** */
 
 .more {
-	padding: 20px 40px;
+	padding: 10px 40px;
 }
 
 .more:hover a {
@@ -103,18 +103,20 @@
 
 /* CALENDAR STYLES */
 
-.cal-container {
-	margin: 40px -21px;
+.intro {
+	padding: 60px 0;
 }
 
-
-
+.cal-container {
+	padding: 30px 0;
+	background-color: #FAFAFA;
+}
 
 	.cal {
-		width: 250px;
-		height: 300px;
+		width: 220px;
+
 		padding: 30px 20px;
-		margin: 10px;
+		margin: 10px;		
 	}
 
 		.date1, .date2 {
@@ -128,18 +130,14 @@
 		}
 
 		.date2 {
-			font-size: 48px;
+			font-size: 40px;
 			color: #1EA89D;
-			margin: -10px;
+			/*margin: -10px;*/
 		}
 
-		.webinar {
-			margin: 35px 0;
-		}
-
-		.webinar-info {
-			line-height: 17px;
-		}
+		/*.webinar {
+			margin: 35px 0 10px;
+		}*/
 
 	.cal:hover .date2 {
 		color: #FFFFFF;
@@ -147,6 +145,27 @@
 
 
 /* WEBINAR BAND STYLES */
+
+.intro {
+	padding: 80px 0;
+}
+
+.intro h3 {
+	font-family: 'proxima-nova', sans-serif;
+	margin-bottom: 20px;
+}
+
+.intro p {
+	font-size: 16px;
+}
+
+.intro-wrapper {
+	max-width: 800px;
+}
+
+.cal-container {
+	padding: 60px 0;
+}
 
 .webinar-signup {
 	width: 100%;

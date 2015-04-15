@@ -4,22 +4,34 @@ title: Documentation
 active: rb
 ---
 
-<menu>
+<menu data-spy="affix" data-offset-top="408" data-offset-bottom="680">
 	<ul>
-	    <li>Introduction</li>
-	    <li>Required Parameters</li>
-	    <li>Metrics</li>
-	    <li>Filter</li>
-	    <li>Group By</li>
+	    <a href="#intro"><li>Introduction</li></a>
+	    <a href="#param"><li>Required Parameters</li></a>
+	    <a href="#metrics"><li>Metrics</li></a>
+	    <a href="#filter"><li>Filter</li></a>
+	    <a href="#group-by"><li>Group By</li></a>
 	</ul>
 </menu>
 
 
+
+<div class="content">
+
+
 <h1>Report Builder</h1>
+
+<section id="intro">
+
 <h2>Introduction</h2>
 	<p>The Chartbeat Report Builder is designed for analysts and researchers to create and subscribe to custom historical reports about their audience and content. While the Dashboard excels at presenting real-time actionable data, the Report Builder offers the chance to take your data one step further.</p>
 	<p>The tool offers a wide array of metrics, filters, and groups that can be used by both analytics and editorial teams to track audience and content data over time. With the Report Builder interface, not only can you elect to receive these reports in your inbox, but you’ll have access to an archive of all the reports you’ve created. It’s easy to copy this data into your own pivot tables to organize your data however you need.</p>
 	<p>Get started at <a href="http://chartbeat.com/report/builder">chartbeat.com/report/builder</a>.</p>
+
+</section>
+
+<section id="param">
+
 <h2>Required Parameters</h2>
 	<p><b>Report Type</b></p>
 	<p>There are two report types to pick from: a one time report, which creates a single CSV file to be downloaded or sent via email, and a recurring report – which you can subscribe to and receive it in your inbox on a daily, weekly, or monthly basis. Note that daily reports look at the past day of data, weekly reports look at the past week, and monthly look at the past month.</p>
@@ -27,6 +39,11 @@ active: rb
 	<p>The date range specifies time frame you want to pull from for your report. You can select a preset range of the past 7 days, 31 days, the previous 24 hours, or a you can create a custom date range with the calendar box.</p>
 	<p><b>Site</b></p>
 	<p>The site field is the domain that you want to create a report for. Note that you may only select domains that your Chartbeat login has access to.</p>
+
+</section>
+
+<section id="metrics">
+
 <h2>Metrics</h2>
 <p>The metrics parameter identifies which audience and site data points you want returned in your report. Any given query may include multiple metrics to create comprehensive reports.</p>
 <table>
@@ -55,82 +72,51 @@ active: rb
 		<td>A count of the number of page views.</td>
 	</tr>
 </table>
+
+</section>
+
+
+
+<section id="filter">
+
 <h2>Filter</h2>
 <p>Adding a filter to your report allows you to specify a variable you’d like to focus on. Use the filter parameter to dive deeper into your historical metrics and create reports that reflect specific audience breakdowns.</p>
 <table>
 	<tr>
 		<td>Browser</td>
-		<td>The web browser used.</td>
-	</tr>
-	<tr>
-		<td></td>
-		<td>Android</td>
+		<td>The web browser used (Android, Blackbery, Chrome, Firefox, Internet Explorer, Opera, Safari, Unknown)</td>
 	</tr>	
-	<tr>
-		<td></td>
-		<td>Chrome</td>
-	</tr>	
-	<tr>
-		<td></td>
-		<td>Blackberry</td>
-	</tr>	
-	<tr>
-		<td></td>
-		<td>Unknown</td>
-	</tr>	
-	<tr>
-		<td></td>
-		<td>Firefox</td>
-	</tr>	
-	<tr>
-		<td></td>
-		<td>Safari</td>
-	</tr>	
-	<tr>
-		<td></td>
-		<td>Internet Explorer</td>
-	</tr>
-	<tr>
-		<td></td>
-		<td>Opera</td>
-	</tr>		
 	<tr>
 		<td>Demographics</td>
-		<td>If your site sends Chartbeat custom demographic values they will appear under this demo field (unique to your domain).</td>
+		<td>If your site sends Chartbeat custom demographic values they will appear under this demo field (Unique to your domain)</td>
 	</tr>
 	<tr>
 		<td>Demo_type</td>
-		<td>Demographic type (unique to your domain).</td>
+		<td>Demographic type (Unique to your domain)</td>
 	</tr>
 	<tr>
 		<td>Device</td>
-		<td>The device used.</td>
+		<td>The device used (Desktop, Mobile, Tablet)</td>
 	</tr>
-	<tr>
-		<td></td>
-		<td>Mobile</td>
-	</tr>
-	<tr>
-		<td></td>
-		<td>Desktop</td>
-	</tr>
-	<tr>
-		<td></td>
-		<td>Tablet</td>
-	</tr>	
 	<tr>
 		<td>Page Path</td>
-		<td>The reported path of the page (unique to your domain).</td>
+		<td>The reported path of the page (Unique to your domain)</td>
 	</tr>		
 	<tr>
 		<td>Section</td>
-		<td>The section of a site visited (unique to your domain).</td>
+		<td>The section of a site visited (Unique to your domain)</td>
 	</tr>		
 	<tr>
 		<td>Subdomain</td>
-		<td>The specific subdomain (unique to your domain).</td>
+		<td>The specific subdomain (Unique to your domain)</td>
 	</tr>
 	</table>
+
+</section>
+
+
+<section id="group-by">
+
 <h2>Group By</h2>
 <p>Use the group by parameter to select the criteria for which your metrics are returned, such as time of day, geographic location, demographic, and page specific data. Adding additional groups allows you to create more dynamic reports.</p>
 <table>			
@@ -247,3 +233,7 @@ active: rb
 		<td>The minute in the UTC time zone. Use paired with hour (in UTC) to get per-minute time series.</td>
 	</tr>	
 </table>
+
+</section>
+
+</div>

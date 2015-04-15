@@ -4,24 +4,36 @@ title: Documentation
 active: mobilesdk
 ---
 
-<menu>
+<menu data-spy="affix" data-offset-top="408" data-offset-bottom="680">
 	<ul>
-		<li>iOS SDK</li>
-		<li>Android SDK</li>
+		<a href="#intro"><li>Introduction</li></a>
+		<a href="#ios"><li>iOS SDK</li></a>
+		<a href="#android"><li>Android SDK</li></a>
 	</ul>
 </menu>
 
 
-<h1>Chartbeat Mobile SDK Docs</h1>
+<div class="content">
 
+<h1>Mobile SDKs</h1>
 
-<section>
+<section id="#intro">
+
+<h2>Introduction</h2>
+
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris id orci nibh. Phasellus nec efficitur lorem, non pharetra massa. In hac habitasse platea dictumst. Fusce venenatis tortor vel nulla rutrum laoreet. Nullam a nisl sed justo auctor pretium. Nunc a auctor ex, sit amet scelerisque mauris. Ut nulla purus, venenatis nec faucibus egestas, pulvinar at diam. Mauris ullamcorper congue arcu.</p>
+
+</section>
+
+<section id="ios">
 
 <h2>iOS SDK</h2>
 
 <p>The 64-bit 8.1 iOS SDK provides a library for iOS applications so they can send tracking beacons to accurately measure user engagement on app views or pages in Chartbeat.</p>
 
-<p>To get started tracking your iOS app, be sure to download the 64-bit iOS SDK <a href="https://s3.amazonaws.com/ios_sdk/chartbeat_ios_sdk_latest.tgz">here</a>.</p>
+<a href="https://s3.amazonaws.com/ios_sdk/chartbeat_ios_sdk_latest.tgz"><button class="download">Download the 64-bit iOS SDK</button></a>
+
+<p class="version">v2.0.1 &mdash; Last Updated 1/22/2015</p>
 
 <h3>Two Things you Need</h3>
 
@@ -30,17 +42,24 @@ active: mobilesdk
 <p><b>Your Host Domain.</b>The host domain should match the domain name you currently use for Chartbeat, e.g. yoursite.com.</p>
 	<h3>Installing the Chartbeat SDK</h3>
 	<ol>
-		<li>Download the Chartbeat SDK</li>
+		<li>
+			<p>Download the Chartbeat SDK</p>
 			<p>After downloading the iOS SDK, unzip it locally and drag the CBTracker.h and libChartbeat-iOSSDK.a into your Xcode project.</p>	
+		</li>
 	</ol>
 	<h3>Getting Started</h3>					
 	<ol>
-		<li>In your UIApplicationDelegate implementation file (.m) import CBTracker.h: #import "CBTracker.h"</li>
-		<li>In the applicationDidBecomeActive method set your configuration variables:</li>
-		<ul>
-			<li>startTrackerWithAccountID: the integer value of your Chartbeat account ID.</li>
-			<li>setDomain: a string of the domain that you’re tracking with Chartbeat. If your desktop site is tracked in Chartbeat as yoursite.com, we recommend you input setDomain to yoursite.com. However, your app data can be sent to a separate dashboard if you prefer.</li>
-		</ul>
+		<li>
+			<p>In your UIApplicationDelegate implementation file (.m) import CBTracker.h: #import "CBTracker.h"</p>
+		</li>
+		<li>
+			<p>In the applicationDidBecomeActive method set your configuration variables:</p>
+		
+			<ul>
+				<li><p><strong>startTrackerWithAccountID:</strong> the integer value of your Chartbeat account ID.</p></li>
+				<li><p><strong>setDomain:</strong> a string of the domain that you’re tracking with Chartbeat. If your desktop site is tracked in Chartbeat as yoursite.com, we recommend you input setDomain to yoursite.com. However, your app data can be sent to a separate dashboard if you prefer.</p></li>
+			</ul>
+		</li>
 		<p>Your code should look similar to:</p>	
 			<pre><code>[[CBTracker sharedTracker] startTrackerWithAccountID:#####];
 [[CBTracker sharedTracker] setDomain:@"yoursite.com"];</code></pre>
@@ -51,13 +70,13 @@ active: mobilesdk
 	<p>When the app switches into a new view, you must call set authors, sections, and zones for the new content. Then, call trackView for the new view and set a viewID and title.</p>
 	<p>You typically want to do this when the view is visible to the user. These methods should be called in the 'viewDidAppear' method.</p>
 	<ol>
-		<li>Call setAuthors, setSections and setZones for the new view.</li>
+		<li><p>Call setAuthors, setSections and setZones for the new view.</p></li>
 		<p>Each of these should be arrays of strings and refer specifically to the new view. If any of these do not apply, just set to an empty array.</p>
 		<p>Authors and sections can take an array with multiple string elements, each of which will show up as an author/section for that view. Note that there can only be one zone for a view.</p>
-		<li>In the applicationDidBecomeActive method set your configuration variables:</li>
+		<li><p>In the applicationDidBecomeActive method set your configuration variables:</p></li>
 		<ul>
-			<li>startTrackerWithAccountID: the integer value of your Chartbeat account ID.</li>
-			<li>setDomain: a string of the domain that you’re tracking with Chartbeat. If your desktop site is tracked in Chartbeat as yoursite.com, we recommend you input setDomain to yoursite.com. However, your app data can be sent to a separate dashboard if you prefer.</li>
+			<li><p><strong>startTrackerWithAccountID:</strong> the integer value of your Chartbeat account ID.</p></li>
+				<li><p><strong>setDomain:</strong> a string of the domain that you’re tracking with Chartbeat. If your desktop site is tracked in Chartbeat as yoursite.com, we recommend you input setDomain to yoursite.com. However, your app data can be sent to a separate dashboard if you prefer.</p></li>
 		</ul>
 		<p>Your code should look similar to:</p>	
 			<pre><code>[[CBTracker sharedTracker] startTrackerWithAccountID:#####];
@@ -65,17 +84,16 @@ active: mobilesdk
 	</ol>
 	<h3>Tracking Video</h3>
 	<ol>
-		<li>In your UIApplicationDelegate implementation file (.m) import CBTracker.h: #import "CBTracker.h"</li>
-		<li>In the applicationDidBecomeActive method set your configuration variables:</li>
-		<ul>
-			<li>startTrackerWithAccountID: the integer value of your Chartbeat account ID.</li>
-			<li>setDomain: a string of the domain that you’re tracking with Chartbeat. If your desktop site is tracked in Chartbeat as yoursite.com, we recommend you input setDomain to yoursite.com. However, your app data can be sent to a separate dashboard if you prefer.</li>
-		</ul>
+		<li><p>In your UIApplicationDelegate implementation file (.m) import CBTracker.h: #import "CBTracker.h"</p></li>
+		<li><p>In the applicationDidBecomeActive method set your configuration variables:</p>
+			<ul>
+				<li><p><strong>startTrackerWithAccountID:</strong> the integer value of your Chartbeat account ID.</p></li>
+				<li><p><strong>setDomain:</strong> a string of the domain that you’re tracking with Chartbeat. If your desktop site is tracked in Chartbeat as yoursite.com, we recommend you input setDomain to yoursite.com. However, your app data can be sent to a separate dashboard if you prefer.</p></li>
+			</ul>
+		</li>
 		<p>Your code should look similar to:</p>	
-			<pre><code>
-[[CBTracker sharedTracker] startTrackerWithAccountID:#####];
-[[CBTracker sharedTracker] setDomain:@"yoursite.com"];
-			</code></pre>
+			<pre><code>[[CBTracker sharedTracker] startTrackerWithAccountID:#####];
+[[CBTracker sharedTracker] setDomain:@"yoursite.com"];</code></pre>
 	</ol>
 	<h3>Seeing your Data</h3>
 	<p>To see your data, load up your app and head to the Chartbeat Publishing dashboard for the domain you set with setDomain (e.g. internet.com). If the domain does not show in the list, head to <a href="https://chartbeat.com/publishing/setup/code">https://chartbeat.com/publishing/setup/code</a> or contact support@chartbeat.com.</p>
@@ -83,13 +101,15 @@ active: mobilesdk
 </section>
 
 
-<section>
+<section id="android">
 
 	<h2>Android SDK</h2>
 
 	<p>The Android SDK for Chartbeat is designed to be a simple, efficient, method of accessing the Chartbeat API from an Android app.</p>
 
-	<p>To get started tracking your iOS app, be sure to download the 64-bit Android SDK <a href="http://pages.chartbeat.com/support/implementation/android_sdk_master.zip">here</a>.</p>
+	<a href="http://pages.chartbeat.com/support/implementation/android_sdk_master.zip"><button class="download">Download the Android SDK</button></a>
+
+	<p class="version">v1.0.0 &mdash; Last Updated 6/5/2014</p>
 
 	<h3>Two Things you Need</h3>
 	
@@ -100,13 +120,14 @@ active: mobilesdk
 	<h3>Implementation Instructions</h3>
 	
 	<ol>
-		<li>Download the Chartbeat Android SDK and unzip locally</li>	
-		<li>Call trackView(), setSections(), setAuthors(), and setZones() for a given view.</li>
+		<li><p>Download the Chartbeat Android SDK and unzip locally</p></li>	
+		<li><p>Call trackView(), setSections(), setAuthors(), and setZones() for a given view.</p>
 			<p>Your code should look similar to:</p>
 			<pre><code>Tracker.trackView(VIEW_ID, VIEW_TITLE);
 Tracker.setSections("technology");
 Tracker.setAuthors("Doug Benedicto,Nick Moy");
-Tracker.setZones("zone/tech");</code></pre>	
+Tracker.setZones("zone/tech");</code></pre>
+			</li>	
 	</ol>
 	
 	<h3>Tracking Views</h3>	
@@ -120,3 +141,5 @@ Tracker.setZones("zone/tech");</code></pre>
 	<p>Where the first parameter is your Chartbeat Account UID, the second parameter is your host domain, and the third parameter is the context.</p>
 
 </section>
+
+</div>

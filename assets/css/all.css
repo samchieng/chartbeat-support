@@ -11,6 +11,18 @@ font-style:normal;font-weight:400;
 }
 
 @font-face {
+font-family: "merriweather";
+src:url("../fonts/Merriweather-Bold.otf") format("opentype");
+font-style:normal;font-weight:600;
+}
+
+@font-face {
+font-family: "proxima-nova";
+src:url("../fonts/Proxima Nova Thin.otf") format("opentype");
+font-style:normal;font-weight:300;
+}
+
+@font-face {
 font-family: "proxima-nova";
 src:url("../fonts/Proxima Nova Reg.otf") format("opentype");
 font-style:normal;font-weight:400;
@@ -34,12 +46,16 @@ font-style:normal;font-weight:700;
 
 body {
 	font-family: 'proxima-nova', sans-serif;
-	color: #666666;
+	color: #354B59;
 }
 
 h1, h2, h3, h4, h5 {
 	font-family: 'merriweather', sans-serif;
 	font-weight: 400;
+}
+
+b, strong {
+	font-weight: 600;
 }
 
 .container-fluid {
@@ -51,11 +67,11 @@ h1, h2, h3, h4, h5 {
 }
 
 a {
-	color: #666666;
+	color: #354B59;
 }
 
-a:hover {
-	color: #666666;
+a:hover, a:active, a:focus {
+	color: #354B59;
 	text-decoration: none;
 }
 
@@ -138,6 +154,13 @@ ul {
 				background: none;
 				text-decoration: none;
 			}
+
+
+		/*Adds Hover Feature for Dropdown
+
+		.dropdown:hover > .dropdown-menu {
+			display: block;
+		}*/
 
 		.dropdown-menu {
 			margin-top: 8px;
@@ -229,7 +252,7 @@ ul {
 }
 
 .page-hero p {
-	font-size: 16px;
+	font-size: 18px;
 }
 
 @media (max-width: 910px) {
@@ -264,7 +287,7 @@ ul {
 		text-align: center;
 		font-size: 13px;
 		font-weight: 600;
-		padding: 10px 10px 8px;
+		padding: 13px 10px 11px;
 	}
 
 	.subnav li:not(.active):hover {
@@ -300,14 +323,14 @@ ul {
 }
 
 .contact-links li a {
-	color: #FFFFFF;
+	color: #cfdce7;
 	text-transform: uppercase;
 	font-weight: 600;
-	letter-spacing: 1px
+	letter-spacing: 1.5px;
 }
 	
 	.contact-links li a:hover {
-		color: #23527c;
+		color: #FFFFFF;
 	}
 
 

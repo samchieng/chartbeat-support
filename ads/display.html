@@ -1,12 +1,20 @@
 ---
 layout: docs_ads_layout
 title: Ads Documentation
+active: display
 categories: docs, ads
 ---
 
+ 
+
+
+<div class="content">
+
+<h1>Campaign Tracking with DFP Integration</h1>
+
 <section>
 
-	<h1>Campaign Tracking with DFP Integration</h1>                        
+                    
 	<p>Chartbeat integrates with your DFP account in order to communicate campaign tracking and display helpful information abot your campaigns in the Chartbeat user interface. Below you&#146;ll find instructions on how to set up this integration for both DFP Premium and Small Business.</p>
 
 	<h2>Setup Oauth</h2>
@@ -63,13 +71,27 @@ categories: docs, ads
 
 
 <h1>Campaign Tracking with All Ad Servers</h1>
+
+<section>
+
 <p>Chartbeat Advertising is built on top of the existing Chartbeat Publishing code on your site. If you do <strong>not</strong> already have Chartbeat Publishing code on your site, please refer to our <a href="#">Getting Started Guide.</a>
 
 <h2>Ads Served in iFrames</h2>
+
+<section>
+
 <p>In order to track ads served in iFrames you&#146;ll need to add the following tag to the HTML inside the iFrame. Make sure you are generating your own creative and campaign IDs. These attributes should contain values that you want us to track/display on the dashboard (so make them nice and friendly!).</p>
 <pre><code>&#60;div id="chartbeat-ad-data" data-cb-creative-id="put_the_creative_id_here" data-cb-campaign-id="put_the_campaign_id_here"&#62;&#60;/div&#62;
 &#60;script src="//static.chartbeat.com/js/campaign_tracker.js"&#62;&#60;/script&#62;</code></pre>
 <p>Also, please ensure that each iFrame has a unique name. This is important because it allows us to associate the campaign-specific data we&#146;re pulling with the data from the rest of the advertising product. <strong>If there is no id attribute on the iFrame itself, the campaign tracking system will not work.</strong></p>
 
+</section>
+
+<section>
+
 <h2>Ads NOT Served in iFrames</h2>
 <p>For non-iFrame embedded advertisements, we require the <code>data-cb-campaign-id</code> and <code>data-cb-creative-id</code> attributes to be placed either on the ad container <code>&#60;div&#62;</code> that we are already tracking (via <code>data-cb-ad-id</code>) OR on any element within the ad container <code>&#60;div&#62;</code>.</p>
+
+</section>
+
+</div>

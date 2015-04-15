@@ -1,18 +1,47 @@
 ---
 layout: docs_ads_layout
 title: Ads Documentation
-active: getting_started
+active: ads
+categories: docs, ads
 ---
 
+<menu data-spy="affix" data-offset-top="390" data-offset-bottom="680">
+    <ul>
+        <a href="#intro"><li>Introduction</li></a>
+        <a href="#code"><li>Our Code</li></a>
+        <a href="#accounts"><li>UID &amp; Subdomains</li></a>
+        <a href="#canonical"><li>Canonical Links</li></a>
+        <a href="#path"><li>Custom Path Variable</li></a>
+        <a href="#titles"><li>Custom Page Titles</li></a>
+        <a href="#sectionsauthors"><li>Section &amp; Author Variables</li></a>
+        <a href="#mobile"><li>Mobile Site Implementation</li></a>
+        <a href="#ajax"><li>AJAX &amp; Infinite Scroll</li></a>
+        <a href="#cookies"><li>Cookies</li></a>
+    </ul>
+</menu>
+
+<div class="content">
 
 <h1>Getting Started Guide: Chartbeat Advertising</h1>
-<p>This guide includes complete instructions on how to install Chartbeat on your website. This includes both our editorial and advertising tools. Existing Chartbeat Publishing customers wishing to implement our advertising tools should refer to the <a href="#">Display Advertising</a> or <a href="#">Paid Content</a> instructions.</p>
 
-<h2 id="js">Chartbeat JavaScript</h2>
-<p>Insert this right after the opening <code>&#60;head&#62;</code> tag.
-    <pre><code class="javascript">&#60;script type='text/javascript'&#62;var _sf_startpt=(new Date()).getTime()&#60;/script&#62;</code></pre>
-    <p>Insert this right after the closing <code>&#60;/body&#62;</code> tag.
-        <pre><code class="javascript">&#60;script type='text/javascript'&#62;
+<section id="intro">
+
+<h2>Introduction</h2>
+
+<p>This guide includes complete instructions on how to install Chartbeat on your website. This includes both our editorial and advertising tools. Existing Chartbeat Publishing customers wishing to implement our advertising tools should refer to the <a href="display.html">Display Advertising</a> or <a href="paid.html">Paid Content</a> instructions.</p>
+
+</section>
+
+<section id="code">
+
+<h2>Chartbeat JavaScript</h2>
+
+<p>Insert this right after the opening <code>&#60;head&#62;</code> tag.</p>
+
+<pre><code class="javascript">&#60;script type='text/javascript'&#62;var _sf_startpt=(new Date()).getTime()&#60;/script&#62;</code></pre>
+
+<p>Insert this right after the closing <code>&#60;/body&#62;</code> tag.
+<pre><code class="javascript">&#60;script type='text/javascript'&#62;
 var _sf_async_config={};
 /** CONFIGURATION START **/
 _sf_async_config.uid = YOUR_UID; //CHANGE THIS
@@ -22,86 +51,107 @@ _sf_async_config.sections = 'Section1,Section2'; //CHANGE THIS
 _sf_async_config.authors = 'Author1,Author2'; //CHANGE THIS
 _sf_async_config.zone = 'Zone_Name'; //CHANGE THIS
 /** CONFIGURATION END **/
-
-(function(){
-function loadChartbeat() {
-window._sf_endpt=(new Date()).getTime();
-var e = document.createElement('script');
-e.setAttribute('language', 'javascript');
-e.setAttribute('type', 'text/javascript');
-e.setAttribute('src', '//static.chartbeat.com/js/chartbeat_pub.js');
-document.body.appendChild(e);
-}
-var oldonload = window.onload;
-window.onload = (typeof window.onload != 'function') ?
-loadChartbeat : function() { oldonload(); loadChartbeat(); };
-})();
+(function() {
+        function loadChartbeat() {
+            window._sf_endpt = (new Date()).getTime();
+            var e = document.createElement('script');
+            e.setAttribute('language', 'javascript');
+            e.setAttribute('type', 'text/javascript');
+            e.setAttribute('src', '//static.chartbeat.com/js/chartbeat_pub.js');
+            document.body.appendChild(e);
+        }
+        var oldonload = window.onload;
+        window.onload = (typeof window.onload != 'function') ?
+            loadChartbeat : function() {
+                oldonload();
+                loadChartbeat();
+            };
+    })();
 &#60;/script&#62;</code></pre>
 
-        <h2>Chartbeat JavaScript Instructions</h2>
-        <p><strong>We are unable to measure ad exposure on a page that lacks this JavaScript. Please ensure that this code is included globally on your site.</strong></p>
+</section>
 
-        <p><strong>STEP 1:</strong> Place the first line of JavaScript at the beginning of your opening <code>&#60;head&#62;</code> tag.</p>
 
-        <p><strong>STEP 2:</strong> Place the second part of the JavaScript before the closing <code>&#60;/body&#62;</code> tag and ensure configuration variables are dynamically populating for each page:</p>
-        
-        <ol>
-            <li>
-                <p>Replace YOUR_UID and YOUR_DOMAIN_NAME with the uid gaven to you via email and your actual domain name (&#145;demo.com&#146; not &#145;www.demo.com&#146;). These are static variables and should be the same for all pages and subdomains on yoru site.</p>
-            </li>
-            <li>
-                <p>Configure section and author tags by dynamically populating these variables with your existing page metadata. A page may have multiple sections and authors (comma separated). For more info, you can check out our Section and Author tagging section on our <a href="#">Chartbeat Publishing Implementation Guide</a>.</p>
-                <p><i>Note these configuration variables are used to organize content by author and site section in our Editorial product. They are not usedd in the display advertising tool</i></p>
-            </li>
-            <li>
-                <p>Define advertising zones using the <code>zone</code> configuration variable.</p>
-                <p>Chartbeat uses zones as a way of understanding how a given ad slot/position performs on different parts of your site. The zone values that you use should match how you package and sell ad units across different sections of your site.</p>
-                <p>You will need to dynamically populate the &#147;Zone Name&#148; value. Zone names should be a single string value. We can only accept one zone value per page. If you use a hierarchical site/zone structure (popular in DFP) please provide the entire hierarchy of the page with each level separated by a single slash, for example:</p>
-                <pre><code>_sf_async_config.zone = 'us/business/technology';</code></pre>
-            </li>
-        </ol>
+<section>
 
-        <h2 id="custom">Optional: Setting up Custom Metrics</h2>
-        <p>The following snippet of code can be added to our JavaScript directly after the configuration settings (<code>/** CONFIGURATION END **/</code>) in order to send us additional user-level data.</p>
+<h2>Chartbeat JavaScript Instructions</h2>
+<p><strong>We are unable to measure ad exposure on a page that lacks this JavaScript. Please ensure that this code is included globally on your site.</strong></p>
 
-            <pre><code>/** CUSTOM METRICS START **/
+<p><strong>STEP 1:</strong> Place the first line of JavaScript at the beginning of your opening <code>&#60;head&#62;</code> tag.</p>
+
+<p><strong>STEP 2:</strong> Place the second part of the JavaScript before the closing <code>&#60;/body&#62;</code> tag and ensure configuration variables are dynamically populating for each page:</p>
+
+<ol>
+    <li>
+        <p>Replace YOUR_UID and YOUR_DOMAIN_NAME with the uid gaven to you via email and your actual domain name (&#145;demo.com&#146; not &#145;www.demo.com&#146;). These are static variables and should be the same for all pages and subdomains on yoru site.</p>
+    </li>
+    <li>
+        <p>Configure section and author tags by dynamically populating these variables with your existing page metadata. A page may have multiple sections and authors (comma separated). For more info, you can check out our Section and Author tagging section on our <a href="#">Chartbeat Publishing Implementation Guide</a>.</p>
+        <p><i>Note these configuration variables are used to organize content by author and site section in our Editorial product. They are not usedd in the display advertising tool</i></p>
+    </li>
+    <li>
+        <p>Define advertising zones using the <code>zone</code> configuration variable.</p>
+        <p>Chartbeat uses zones as a way of understanding how a given ad slot/position performs on different parts of your site. The zone values that you use should match how you package and sell ad units across different sections of your site.</p>
+        <p>You will need to dynamically populate the &#147;Zone Name&#148; value. Zone names should be a single string value. We can only accept one zone value per page. If you use a hierarchical site/zone structure (popular in DFP) please provide the entire hierarchy of the page with each level separated by a single slash, for example:</p>
+        <pre><code>_sf_async_config.zone = 'us/business/technology';</code></pre>
+    </li>
+</ol>
+
+</section>
+
+
+<section>
+
+
+<h2 id="custom">Optional: Setting up Custom Metrics</h2>
+<p>The following snippet of code can be added to our JavaScript directly after the configuration settings (<code>/** CONFIGURATION END **/</code>) in order to send us additional user-level data.</p>
+
+<pre><code>/** CUSTOM METRICS START **/
 var _cbq = window._cbq || [];
 _cbq.push(['_acct','USER_TYPE']);
 _cbq.push(['_demo','a=30,b=finance,c=ny']);
 /** CUSTOM METRICS END **/</code></pre>
            
-            <p>The example above includes:</p>
-           
-            <ol>
-                <li>
-                    <p><strong>User Type</strong> (for sites with registered users)</p>
-                    <p>If you allow users to login to your site, or provide subscriber-only content, you can pass this information to Chartbeat in order to see how much time different types of users spend engaging with your content and ads. Use the following line to define User Type:</p>
-                    <pre><code>_cbq.push(['_acct', 'USER_TYPE']);</code></pre>
-                    <p>For the <code>USER_TYPE</code> value, please use one of the three standardized values below:</p>
-                    <ol>
-                        <li>Regular/anonymous user: 'anon'</li>
-                        <li>Logged-in/registered user: 'lgdin'</li>
-                        <li>Paid subscriber: 'paid'</li>
-                    </ol>
-                </li>
-                <li>
-                    <p><strong>Demographics</strong></p>
-                    <p>If available, demographic information can be supplied via the <code>_demo</code> field, and can be provided as a comma-separated list of key/vaue pairs that you would like to identify the user with. For instance, on a page session for a user under 30 years old who lives in New York and works in finance, you could use:</p>
-                    <pre><code>_cbq.push([['_demo', 'a=30,b=finance,c=ny']);</code></pre>
-                    <p>Up to 8 traits may be specified per user. We ask that you try to keep key names relatively short (3 characters or less) and values at 32 characters or less. If this limitation is problematic, please <a href="http://chart.bt/help">let us know</a>. Ideally, the k/v pairs that you send will match our existing internal k/v structure. If you are sending demographic data, please also be sure to <a href="http://chart.bt/help">email us</a> a table that includes the descriptive names for keys and values.</p>
-                </li>
-            </ol>
+<p>The example above includes:</p>
 
-            <h2 id="ajax">Special Considerations: Dynamic Page Loading / AJAX</h2>                      
-            <p>If your site changes pages without reloading the DOM, you might signal to Chartbeat that this change is occuring via the <code>pSUPERFLY.virtualPage()</code> function. This should be called as part of the page change event and BEFORE new ads are loaded onto the page. New configuration variables should be set for the target page prior to calling <code>virtualPage()</code>.</p>
-            
-            <p>Example:</p>
-            
-            <pre><code>_sf_async_config.sections = 'New Section 1, New Section 2';
+<ol>
+    <li>
+        <p><strong>User Type</strong> (for sites with registered users)</p>
+        <p>If you allow users to login to your site, or provide subscriber-only content, you can pass this information to Chartbeat in order to see how much time different types of users spend engaging with your content and ads. Use the following line to define User Type:</p>
+        <pre><code>_cbq.push(['_acct', 'USER_TYPE']);</code></pre>
+        <p>For the <code>USER_TYPE</code> value, please use one of the three standardized values below:</p>
+        <ol>
+            <li>Regular/anonymous user: 'anon'</li>
+            <li>Logged-in/registered user: 'lgdin'</li>
+            <li>Paid subscriber: 'paid'</li>
+        </ol>
+    </li>
+    <li>
+        <p><strong>Demographics</strong></p>
+        <p>If available, demographic information can be supplied via the <code>_demo</code> field, and can be provided as a comma-separated list of key/vaue pairs that you would like to identify the user with. For instance, on a page session for a user under 30 years old who lives in New York and works in finance, you could use:</p>
+        <pre><code>_cbq.push([['_demo', 'a=30,b=finance,c=ny']);</code></pre>
+        <p>Up to 8 traits may be specified per user. We ask that you try to keep key names relatively short (3 characters or less) and values at 32 characters or less. If this limitation is problematic, please <a href="http://chart.bt/help">let us know</a>. Ideally, the k/v pairs that you send will match our existing internal k/v structure. If you are sending demographic data, please also be sure to <a href="http://chart.bt/help">email us</a> a table that includes the descriptive names for keys and values.</p>
+    </li>
+</ol>
+
+</section>
+
+<section>
+
+<h2 id="ajax">Special Considerations: Dynamic Page Loading / AJAX</h2>                      
+<p>If your site changes pages without reloading the DOM, you might signal to Chartbeat that this change is occuring via the <code>pSUPERFLY.virtualPage()</code> function. This should be called as part of the page change event and BEFORE new ads are loaded onto the page. New configuration variables should be set for the target page prior to calling <code>virtualPage()</code>.</p>
+
+<p>Example:</p>
+
+<pre><code>_sf_async_config.sections = 'New Section 1, New Section 2';
 _sf_async_config.authors = 'New Author';
 _sf_async_config.zone = 'New Zone';
 pSUPERFLY.virtualPage('/new_page_path','New Page Title');</code></pre>
-            
-            <p><strong>Note:</strong> Please ensure that the path parameter that you use is a relative path (as showin in the example).</p>
-            
-            <p>Please do not call the <code>virtualPage()</code> function on the initial (real) page load as this will cause inaccurate referall data. It should only be called for page changes that happen after the initial page load.</p>
+
+<p><strong>Note:</strong> Please ensure that the path parameter that you use is a relative path (as showin in the example).</p>
+
+<p>Please do not call the <code>virtualPage()</code> function on the initial (real) page load as this will cause inaccurate referall data. It should only be called for page changes that happen after the initial page load.</p>
+
+</section>
+
+</div>
