@@ -1,5 +1,10 @@
 @import url("all.css");
 
+/* For Glossary Styles */
+@import url("docs.css");
+
+
+
 
 .green {
 	color: #1EA89D;
@@ -9,7 +14,7 @@
 .theater {
 	width: 100%;
 	background-color: #2F3E4A;
-	padding: 20px 0;
+	padding: 40px 0;
 }
 
 .video-list {
@@ -30,7 +35,6 @@
 .video:hover img {
 	opacity: 1;
 }
-
 
 
 
@@ -194,6 +198,15 @@
 
 
 /* GLOSSARY STYLES */
+
+
+
+
+
+
+
+
+
 
 section:after {
 	  content: "";
