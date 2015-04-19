@@ -3,7 +3,7 @@ layout: default
 categories: edu
 ---
 
-<link href="../assets/css/edu.css" rel="stylesheet" type='text/css'>
+<link href="{{ site.baseurl }}/assets/css/edu.css" rel="stylesheet" type='text/css'>
 
 
 <div class="page-hero">
@@ -13,7 +13,7 @@ categories: edu
         <p>Dive into our education resources and best practice videos to take your Chartbeat usage to the next level to best capitalize on real-time opportunities.</p>
         </div>
         <div class="hero-right">
-            <img src="../assets/img/icon_edu.png">
+            <img src="{{ site.baseurl }}/assets/img/icon_edu.png">
         </div>
     </div>
 </div>
@@ -23,33 +23,33 @@ categories: edu
     <div class="container-fluid">
         <ul>
              {% if page.active == "warmup" %}
-                <a href="../edu/"><li class="active">Warm Ups</li></a>
+                <a href="{{ site.baseurl}}/edu/warmup/"><li class="active">Warm Up</li></a>
             {% else %}
-                <a href="../edu/"><li>Warm Ups</li></a>
+                <a href="{{ site.baseurl}}/edu/warmup/"><li>Warm Up</li></a>
             {% endif %}
 
             {% if page.active == "crashcourse" %}
-                <a href="#"><li class="active">Crash Course</li></a>
+                <a href="{{ site.baseurl }}/edu/crashcourse/"><li class="active">Crash Course</li></a>
             {% else %}
-                <a href="#"><li>Crash Course</li></a>
+                <a href="{{ site.baseurl }}/edu/crashcourse/"><li>Crash Course</li></a>
             {% endif %}
             
             {% if page.active == "goingfurther" %}
-                <a href="#"><li class="active">Going Further</li></a>
+                <a href="{{ site.baseurl }}/edu/goingfurther/"><li class="active">Going Further</li></a>
             {% else %}
-                <a href="#"><li>Going Further</li></a>
+                <a href="{{ site.baseurl }}/edu/goingfurther/"><li>Going Further</li></a>
             {% endif %}
             
             {% if page.active == "schedule" %}
-                <a href="../edu/schedule.html"><li class="active green">Upcoming</li></a>
+                <a href="{{ site.baseurl }}/edu/schedule.html"><li class="active green">Upcoming</li></a>
             {% else %}
-                <a href="../edu/schedule.html"><li class="green">Upcoming</li></a>
+                <a href="{{ site.baseurl }}/edu/schedule.html"><li class="green">Upcoming</li></a>
             {% endif %}
             
             {% if page.active == "glossary" %}
-                <a href="../edu/glossary.html"><li class="active">Glossary</li></a>
+                <a href="{{ site.baseurl }}/edu/glossary.html"><li class="active">Glossary</li></a>
             {% else %}
-                <a href="../edu/glossary.html"><li>Glossary</li></a>
+                <a href="{{ site.baseurl }}/edu/glossary.html"><li>Glossary</li></a>
             {% endif %}
             
         </ul>
@@ -61,6 +61,5 @@ categories: edu
 <div>
 
 {{ content }}
-
 
 </div>

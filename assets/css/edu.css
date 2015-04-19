@@ -1,108 +1,102 @@
-@import url("all.css");
-
 /* For Glossary Styles */
 @import url("docs.css");
 
 
 
 
-.green {
-	color: #1EA89D;
-}
-
-
 .theater {
 	width: 100%;
-	background-color: #2F3E4A;
+	background-color: #FFFFFF;
 	padding: 40px 0;
 }
 
-.video-list {
+.video-container {
 	background-color: #FAFAFA;
+	padding: 60px 0;
 }
 
+	.video-intro {
+		margin-bottom: 40px;
+	}
+
+
+	.video-list {
+		width: 970px;
+		margin: 0 auto;
+	}
+
+
 .video {
-	padding: 20px 10px;
-	margin: 20px;
-	border: 1px solid #FFFFFF;
+	padding: 0 20px;
+	margin: 15px;
+	width: 290px;
+	min-height: 350px;
+	vertical-align: top;
+	position: relative;
 }
 
 .video img {
-	margin: 10px 0;
-	opacity: 0.4;
+	margin: 25px 0;
+	opacity: 0.7;
+	border-radius: 100%;
+	width: 170px;
 }
 
 .video:hover img {
 	opacity: 1;
 }
 
-
-
-
-/* MAIN STYLES */
-
-.main-edu {
-	margin: 40px 0;
+.video h4 {
+	line-height: 1.4em;
 }
-
-.main-edu h4 {
-	line-height: 1.5em;
-}
-
-
-
-/* ***** Video List Stylesheet ***** */
-
-.series {
-	margin: 20px 0;
-	padding: 20px 0;
-}
-	
-.series h3, .series p, .series .video {
-	margin-bottom: 20px;
-}
-
-.edu-left {
-	float: left;
-	max-width: 560px;
-}
-
-.edu-right {
-	float: right;
-	max-width: 560px;
-}
-
-	.float-container:after {
-	  content: "";
-	  display: table;
-	  clear: both;
-	}
-
-.grey-bg {
-	background-color: #F7F8F9;
-}
-
-
-
 
 .time {
+	position: absolute;
+	bottom: 5px;
+	width: 250px;
+}
+
+.time p {
+	font-size: 14px;
+	text-align: center;
+}
+
+
+
+.prev-next {
+	margin: 30px 0;
+	padding: 15px;
+}
+
+.prev, .next {
+	font-size: 16px;
+	display: inline-block;
+}
+
+.prev {
+	float: left;
+	text-align: left;
+}
+
+.next {
 	float: right;
-	margin-left: 2px;   /* check this */
+	text-align: right;
 }
 
-
-
-
-
-/* ***** Individual Video Stylesheet ***** */
-
-.more {
-	padding: 10px 40px;
+.prev-next:after {
+	content: "";
+	display: table;
+	clear: both;
 }
 
-.more:hover a {
-	color: #FFFFFF;
-}
+.prev a, .next a {
+	color: #1EA89D;
+	}
+
+	.prev a:hover, .next a:hover {
+		color: #007572;
+	}
+
 
 
 /* CALENDAR STYLES */
@@ -151,11 +145,12 @@
 /* WEBINAR BAND STYLES */
 
 .intro {
-	padding: 80px 0;
+	padding: 60px 0;
 }
 
 .intro h3 {
 	font-family: 'proxima-nova', sans-serif;
+	font-size: 30px;
 	margin-bottom: 20px;
 }
 
@@ -189,35 +184,4 @@
 .webinar-signup button:hover {
 	background-color: #D85565;
 	color: #FFFFFF;
-}
-
-
-
-
-
-
-
-/* GLOSSARY STYLES */
-
-
-
-
-
-
-
-
-
-
-section:after {
-	  content: "";
-	  display: table;
-	  clear: both;
-	}
-
-section {
-	margin: 30px 0;
-}
-
-.row {
-	margin: 0;
 }

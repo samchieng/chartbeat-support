@@ -1,3 +1,5 @@
+/* FONTS */
+
 @font-face {
 font-family: "merriweather";
 src:url("../fonts/Merriweather-Light.otf") format("opentype");
@@ -42,7 +44,11 @@ font-style:normal;font-weight:700;
 
 
 
-/* ALL STYLES */
+
+
+
+
+/************************* ALL STYLES ******************************/
 
 body {
 	font-family: 'proxima-nova', sans-serif;
@@ -80,10 +86,6 @@ ul {
 	padding-left:0;
 }
 
-.center {
-	text-align: center;
-}
-
 .captitle {
 	color: #1EA89D;
 	font-weight: bold;
@@ -92,17 +94,17 @@ ul {
 	margin-bottom: 10px;
 }
 
-.grey {
-	color: #666666;
-}
-
 	.captitle a {
 		color: #1EA89D;
 	}
 
 
 
-/* NAV STYLES */
+
+
+
+
+/* NAVIGATION STYLES */
 
 .nav {
 	background-color: #2F3E4A;
@@ -222,6 +224,10 @@ ul {
 
 
 
+
+
+
+
 /* PAGE HERO STYLES */
 
 .page-hero {
@@ -268,6 +274,9 @@ ul {
 
 
 
+
+
+
 /* SUBNAV STYLES */
 
 .subnav {
@@ -297,6 +306,9 @@ ul {
 	.active {
 		background-color: #FFFFFF;
 	}
+
+
+
 
 
 
@@ -342,6 +354,9 @@ ul {
 
 
 
+
+
+
 /* FOOTER STYLES */
 
 footer {
@@ -374,6 +389,9 @@ footer {
 .footer-links a:hover {
 	color: #999999;
 }
+
+
+
 
 
 

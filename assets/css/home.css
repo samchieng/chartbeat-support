@@ -11,9 +11,11 @@ body {
 }
 
 
-
-
 /* MAIN STYLES */
+
+.main {
+	margin-bottom: 120px;
+}
 
 .main h1 {
 	margin: 100px 0 50px 0;
@@ -70,7 +72,42 @@ body {
 /* CC TEAM STYLES */
 
 .ccteam {
-	margin: 50px 0 30px;
+	margin: 80px 0 0;
+	background-color: #FFFFFF;
+	padding: 50px 0;
+}
+
+.ccteam > .container-fluid {
+	max-width: 1000px;
+}
+
+.cc-left {
+	float: left;
+	width: 700px;
+}
+
+.cc-left h3 {
+	margin-bottom: 50px;
+	font-weight: 300;
+}
+
+.cc-left p {
+	font-size: 18px;
+}
+
+.cc-right {
+	float: right;
+}
+
+.cc-intro:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.cc-right img {
+	height: 160px;
+	margin: 10px;
 }
 
 .ccteam h4 {
@@ -87,7 +124,7 @@ body {
 
 	.ccteam li {
 		display: inline-block;
-		margin: 5px;
+		margin: 0 10px;
 	}
 
 	.ccteam li:first-child {
@@ -98,9 +135,28 @@ body {
 		margin-right: 0;
 	}
 
+	.ccpic-all li {
+		vertical-align: middle;
+	}
+
 	.ccpic img {
-		height: 106px;
-		width: 106px;
+		height: 90px;
+		width: 90px;
 		border: 1px solid #EAEAEA;
-		opacity: 0.9;
+		opacity: 0.85;
+		border-radius: 100%;
+	}
+
+	.name {
+		margin: 5px 0;
+		font-weight: 600;
+		visibility: hidden;
+	}
+
+	.ccpic img:hover {
+		opacity: 1;
+	}
+
+	.ccpic:hover ~.name {
+		visibility: visible;
 	}
